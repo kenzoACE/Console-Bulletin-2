@@ -917,6 +917,8 @@ string getFile2()
 	std::size_t atCount = 0;
 	infile.open(current_filename, std::ios::in);
 
+		numberOfPosts = 0;
+
 	for (int x = 0; x < 257; x++)// To get you all the lines.
 	{
 		getline(infile, STRING);
@@ -928,7 +930,7 @@ string getFile2()
 			//cout << "end counting file";
 			return "";
 		}
-		else if(atCount != std::string::npos && atCount < 400000)
+		else if(atCount != std::string::npos)
 		{
 			tempFileLines3[x] = STRING;
 			
@@ -941,7 +943,7 @@ string getFile2()
 		}
 		else
 		{
-			tempFileLines3[x] = "\r\n\n";
+			tempFileLines3[x] = "\n";
 		}
 
 		STRING.assign(400000, 'a');
@@ -951,11 +953,14 @@ string getFile2()
 	infile.close();
 
 	int tempNum = stoi(NUMBER.c_str());
-	numPosts = tempNum;
+	numPosts = numberOfPosts;
 
 	if (numberOfPosts != tempNum)
 	{
-		cout << "debug here";
+		cout << "debug here. array count = ";
+		cout << numberOfPosts;
+		cout << "data file = ";
+		cout << tempNum;
 		cout << "\r\n";
 	}
 
