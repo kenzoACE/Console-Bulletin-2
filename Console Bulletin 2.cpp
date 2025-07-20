@@ -14,7 +14,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <locale>
-#include <FormatDelim.h>
+#include <C:\Users\kenzo\source\repos\Console Bulletin 2\Console Bulletin 2\FormatDelim.h>
 #include <regex>
 
 
@@ -807,6 +807,58 @@ string getFile2()
 	STRING.clear();
 	STRING.resize(400000);
 
+	encryptedFileName.assign('a', 50);
+	encryptedFileName.clear();
+	encryptedFileName.resize(50);
+
+	//get archived files first
+	std::string encrypted_string = "encryptedfile1";
+	encryptedFileName.assign(base64_encode(encrypted_string));
+	ifstream infile33;
+	infile33.imbue(std::locale("en_US.UTF-8"));
+
+	try {
+		infile33.open(encryptedFileName, std::ios::in);
+		if (!infile33.is_open()) {
+			throw std::ios_base::failure("File not found");
+		}
+	}
+	catch (const std::ios_base::failure& e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::wofstream outfile(encryptedFileName); // Create the file
+		outfile.imbue(std::locale("en_US.UTF-8"));
+
+		if (!outfile) {
+			std::cerr << "Failed to create the file." << std::endl;
+			return fileItSelf2;
+		}
+	}
+	infile33.getloc();
+	STRING.clear();
+
+	for (int x = 0; x < 10000 && infile33.peek() != EOF; x++)// To get you all the lines.
+	{
+		getline(infile33, STRING);
+
+		if (STRING.length() > 4)
+		{
+			fileOldNames[x].assign(50, 'a');
+			fileOldNames[x].clear(); //erase because it re-reads every time.
+			//fileOldNames[x].resize(50);
+			fileOldNames[x] += STRING;
+		}
+		else
+		{
+			cout << "unable to collect archive";
+			cout << "\r\n";
+		}
+
+		STRING.assign(400000, 'a');
+		STRING.clear();
+		STRING.resize(400000);
+	}
+	infile33.close();
+
 	//initialize temp244
 	for (int x = 0; x < 50000000; x++)
 	{
@@ -969,8 +1021,17 @@ string getFile2()
 		fileItSelf2.at(x) = temp244[x];
 	}
 
+	STRING.clear();
+
 	if (current_filename.length() > 15) // the file name is "Bulletin.txt" which is shorter than log file name with dates added
 	{
+		for (int x = 0; x < 257; x++)
+		{
+			tempFileLines3[x].assign(400000, 'a');
+			tempFileLines3[x].clear();
+			tempFileLines3[x].resize(400000);
+		}
+
 		string tempFileLines4[256];
 		tempFileLines4[0].assign(10000000, 'a'); //10MB
 		tempFileLines4[0].clear();
@@ -1024,57 +1085,7 @@ string getFile2()
 		outfile.close();
 	}
 */
-	encryptedFileName.assign('a', 50);
-	encryptedFileName.clear();
-	encryptedFileName.resize(50);
 
-	std::string encrypted_string = "encryptedfile1";
-	encryptedFileName.assign(base64_encode(encrypted_string));
-	ifstream infile33;
-	infile33.imbue(std::locale("en_US.UTF-8"));
-
-	try {
-		infile33.open(encryptedFileName, std::ios::in);
-		if (!infile33.is_open()) {
-			throw std::ios_base::failure("File not found");
-		}
-	}
-	catch (const std::ios_base::failure& e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
-		std::wofstream outfile(encryptedFileName); // Create the file
-		outfile.imbue(std::locale("en_US.UTF-8"));
-
-		if (!outfile) {
-			std::cerr << "Failed to create the file." << std::endl;
-			return fileItSelf2;
-		}
-	}
-
-	infile33.getloc();
-	STRING.clear();
-	for (int x = 0; x < 10000 && infile33.peek() != EOF; x++)// To get you all the lines.
-	{
-		getline(infile33, STRING);
-
-		if (STRING.length() > 4)
-		{
-			fileOldNames[x].assign(50, 'a');
-			fileOldNames[x].clear(); //erase because it re-reads every time.
-			fileOldNames[x].resize(50);
-			fileOldNames[x] = STRING;
-		}
-		else
-		{
-			break;
-		}
-
-		STRING.assign(400000, 'a');
-		STRING.clear();
-		STRING.resize(400000);
-	}
-	infile33.close();
-
-	STRING.clear();
 
 	return fileItSelf2;
 }
@@ -1971,7 +1982,7 @@ int main()
 	//initialize the old file name list array
 	for (int x = 0; x < 1000; x++)
 	{
-		fileOldNames[x].assign('a', 40);
+		fileOldNames[x].assign('a', 50);
 		fileOldNames[x].clear();
 		//fileOldNames[x].resize(40);
 	}
