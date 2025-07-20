@@ -14,7 +14,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <locale>
-#include <FormatDelim.h>
+#include <C:\Users\kenzo\source\repos\Console Bulletin 2\Console Bulletin 2\FormatDelim.h>
 #include <regex>
 
 
@@ -83,7 +83,7 @@ int counter = 0;
 //int outputFinalHtml(int);
 int exists[INT16_MAX];
 int exisits_index = 0;
-char temp244[500000];
+char temp244[50000000];
 int numPosts;
 int temp16 = 0;
 string number = "   ";
@@ -797,9 +797,9 @@ string getFile2()
 	std::string fileItSelf2;
 	//fstream myfile_reset_file;
 	numberOfPosts = 0;
-	fileItSelf2.assign(400000, 'a');//4MB
+	fileItSelf2.assign(50000000, 'a');//4MB
 	fileItSelf2.clear();
-	fileItSelf2.resize(400000);
+	fileItSelf2.resize(50000000);
 	num50 = 1;
 	string STRING;
 	std::string NUMBER = "   ";
@@ -808,7 +808,7 @@ string getFile2()
 	STRING.resize(400000);
 
 	//initialize temp244
-	for (int x = 0; x < 500000; x++)
+	for (int x = 0; x < 50000000; x++)
 	{
 		temp244[x] = NULL;
 	}
@@ -917,9 +917,9 @@ string getFile2()
 	std::size_t atCount = 0;
 	infile.open(current_filename, std::ios::in);
 
-		numberOfPosts = 0;
+	numberOfPosts = 0;
 
-	for (int x = 0; x < 257; x++)// To get you all the lines.
+	for (int x = 0; x <= 257; x++)// To get you all the lines.
 	{
 		getline(infile, STRING);
 		atCount = STRING.find(";@");
@@ -964,7 +964,7 @@ string getFile2()
 		cout << "\r\n";
 	}
 
-	for (int x = 0; x < 500000; x++)
+	for (int x = 0; x < 50000000; x++)
 	{
 		fileItSelf2.at(x) = temp244[x];
 	}
@@ -1255,9 +1255,9 @@ string listPost()
 	}
 
 	string fileList;
-	fileList.assign('a', 500000);
+	fileList.assign('a', 50000000);
 	fileList.clear();
-	// fileList.resize(500000);
+	// fileList.resize(50000000);
 
 	// count the number of posts
 	for (int x = 0; x < 257; x++)
@@ -2163,11 +2163,11 @@ int main()
 
 
 
-	file2.assign('a', 500000);
+	file2.assign('a', 50000000);
 	file2.clear();
-	file2.resize(500000);
+	file2.resize(50000000);
 
-	for (int x = 0; x < 500000 && temp244[x] != '/0'; x++)
+	for (int x = 0; x < 50000000 && temp244[x] != '/0'; x++)
 	{
 		file2.push_back(temp244[x]);
 	}
@@ -2453,9 +2453,9 @@ int main()
 				outFile55.close();
 
 				//reread from file for other purposes
-				file.assign(500000, 'a');
+				file.assign(50000000, 'a');
 				file.clear();
-				file.resize(500000);
+				file.resize(50000000);
 				file.append(getFile2());
 				file.shrink_to_fit();
 				for (int x = 0; x < file.length(); x++)
@@ -2594,8 +2594,9 @@ int main()
 				outFile2.close();
 
 				//reread from file for other purposes
+				file.assign('a', 50000000);
 				file.clear();
-				file.resize(500000);
+				file.resize(50000000);
 				file.append(getFile2());
 				file.shrink_to_fit();
 				for (int x = 0; x < file.length(); x++)
@@ -3257,8 +3258,7 @@ int main()
 
 			//reread from file for other purposes
 			file.clear();
-			file.resize(500000);
-			file.append(getFile2());
+			file += getFile2();
 			file.shrink_to_fit();
 			for (int x = 0; x < file.length(); x++)
 			{
