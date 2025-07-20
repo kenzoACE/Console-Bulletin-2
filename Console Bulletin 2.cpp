@@ -14,7 +14,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <locale>
-#include <C:\Users\kenzo\source\repos\Console Bulletin 2\Console Bulletin 2\FormatDelim.h>
+#include <FormatDelim.h>
 #include <regex>
 
 
