@@ -14,7 +14,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <locale>
-#include <FormatDelim.h>
+#include <C:\Users\kenzo\source\repos\Console Bulletin 2\Console Bulletin 2\FormatDelim.h>
 #include <regex>
 
 
@@ -116,8 +116,8 @@ string tempFileLines[257];
 string tempFileLines3[257];
 const int MAX_COMMENT_NUM = 64;
 string comment = "";
-string fileLines[256];
-string fileLines2[256];
+string fileLines[257];
+string fileLines2[257];
 
 string commentToInsert;
 string commentNumber2;
@@ -836,10 +836,10 @@ string getFile2()
 	infile33.getloc();
 	STRING.clear();
 
-	for (int x = 0; x < 10000 && infile33.peek() != EOF; x++)// To get you all the lines.
+	for (int x = 0; x < 1000 && infile33.peek() != EOF; x++)// To get you all the lines.
 	{
 		getline(infile33, STRING);
-
+		
 		if (STRING.length() > 4)
 		{
 			fileOldNames[x].assign(50, 'a');
@@ -853,9 +853,9 @@ string getFile2()
 			cout << "\r\n";
 		}
 
-		STRING.assign(400000, 'a');
+		STRING.assign(400, 'a');
 		STRING.clear();
-		STRING.resize(400000);
+		STRING.resize(400);
 	}
 	infile33.close();
 
@@ -971,7 +971,7 @@ string getFile2()
 
 	numberOfPosts = 0;
 
-	for (int x = 0; x <= 257; x++)// To get you all the lines.
+	for (int x = 0; x < 257; x++)// To get you all the lines.
 	{
 		getline(infile, STRING);
 		atCount = STRING.find(";@");
@@ -984,7 +984,7 @@ string getFile2()
 		}
 		else if(atCount != std::string::npos)
 		{
-			tempFileLines3[x] = STRING;
+			tempFileLines3[x] += STRING;
 			
 			for (int x = 0; x < atCount + 2; x++)
 			{
@@ -2886,16 +2886,6 @@ int main()
 							//tempFileLines2[x].resize(5000);
 						}
 
-						int a = numberOfPosts--;
-						stringstream ss;
-						ss << a + 1;
-						string str = ss.str();
-
-						ofstream outfile5;
-						outfile5.open("BulletinData.txt", ios::out);
-						outfile5 << str;
-						outfile5.close();
-
 						// reread from file for other purposes
 						file.clear();
 						//file.resize(500000);
@@ -3005,16 +2995,32 @@ int main()
 						ofstream outFile22;
 						outFile22.open(current_filename);
 
+						int countClone = 0;
+
 						// insert all the posts to the appropriate position
 						for (int x = 0; x < 257; x++)
 						{
 							// Remove NULL characters before writing
 							tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 							outFile22 << tempFileLines3[x];
+
+							if (tempFileLines3[x].length() > 0)
+							{
+								countClone++;
+							}
+
 							outFile22 << "\n";
 						}
 
 						outFile22.close();
+						ofstream outfile5;
+						outfile5.open("BulletinData.txt", ios::out);
+						
+						string ss = std::to_string(countClone);
+						
+						outfile5 << ss;
+						outfile5.close();
+
 						//getFile2();
 
 						//strOutData.assign(500000, 'a');
@@ -3868,13 +3874,12 @@ int main()
 
 			for (int x = 0; fileOldNames[x].length() > 0; x++)
 			{
-				y = x + 1;
+				
 				oldFileNum = std::to_string(y); // Convert x to string;
-				std::cout << oldFileNum + " " + fileOldNames[x] + "\r\n";
-
-				if (fileOldNames[x].length() != 34)
+				if (fileOldNames[x].length() > 7)  //just to check for manual eracing of old file names from file
 				{
-					fileOldNames[x].resize(fileOldNames[x].length() - 1);
+					std::cout << oldFileNum + " " + fileOldNames[x] + "\r\n";
+					y = x + 1;
 				}
 			}
 
@@ -3894,7 +3899,6 @@ int main()
 					count_input++;
 				}
 				postNum2.assign(postNumChar, count_input);
-
 			}
 
 			if (!isNumber(postNum2))
@@ -3908,8 +3912,8 @@ int main()
 					std::cout << "please enter a number within the given range.";
 					input.assign(500, 'a');
 					input.clear();
-					input.resize(500);
-					input.assign("finish");
+					//input.resize(500);
+					input += "finish";
 					master_post == true;
 				}
 			}
@@ -3919,8 +3923,8 @@ int main()
 				{
 					current_filename.assign(50, 'a');
 					current_filename.clear();
-					current_filename.resize(50);
-					current_filename.assign(fileOldNames[stoi(postNum2)]);
+					//current_filename.resize(50);
+					current_filename += fileOldNames[stoi(postNum2)];
 				}
 				catch (exception e)
 				{
