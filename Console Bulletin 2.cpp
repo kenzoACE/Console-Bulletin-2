@@ -3903,19 +3903,12 @@ int main()
 
 			if (!isNumber(postNum2))
 			{
-				try
-				{
-					fileOldNames[stoi(postNum2)].find(":");
-				}
-				catch (exception e)
-				{
-					std::cout << "please enter a number within the given range.";
-					input.assign(500, 'a');
-					input.clear();
-					//input.resize(500);
-					input += "finish";
-					master_post == true;
-				}
+				std::cout << "please enter a number within the given range.";
+				input.assign(500, 'a');
+				input.clear();
+				//input.resize(500);
+				input += "finish";
+				master_post == true;
 			}
 			else
 			{
@@ -4003,3 +3996,4 @@ int main()
 //cout <<  output;
 //cout << ("nothing is being read from the file");
 //outputFinalHtml(juggerknot);
+
