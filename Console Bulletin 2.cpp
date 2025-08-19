@@ -1046,15 +1046,20 @@ string getFile2()
 		for (size_t i = 0; i < fileItSelf2.size(); i += chunkSize) {
 			std::vector<char> chunk(fileItSelf2.begin() + i, fileItSelf2.begin() + min(i + chunkSize, fileItSelf2.size()));
 			xorEncryptDecrypt(chunk, 'K');
-			fileItSelf2.replace(i, chunk.size(), std::string(chunk.begin(), chunk.end()));
+			tempFileLines4[0].replace(i, chunk.size(), std::string(chunk.begin(), chunk.end()));
 		}
 
+		fileItSelf2.clear();
+		fileItSelf2 += tempFileLines[0];
+		numPosts = 256;
+		numberOfPosts = 256;
+		
 		int currentPos = 0;
-		int startPos = 0;
+		int startPos = -1;
 		for (int x = 0; x <= 256; x++)
 		{
-			currentPos = tempFileLines4[0].find('/n', currentPos);
-			tempFileLines3[x] += (tempFileLines4[x].substr(startPos, currentPos));
+			currentPos = tempFileLines4[0].find('/n', currentPos + 1); //include endl char
+			tempFileLines3[x] += (tempFileLines4[0].substr(startPos + 1, currentPos)); //skip endl char
 			startPos = currentPos;
 		}
 	}
@@ -3996,4 +4001,5 @@ int main()
 //cout <<  output;
 //cout << ("nothing is being read from the file");
 //outputFinalHtml(juggerknot);
+
 
