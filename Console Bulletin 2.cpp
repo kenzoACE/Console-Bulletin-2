@@ -970,8 +970,11 @@ string getFile2()
 	infile.open(current_filename, std::ios::in);
 
 	numberOfPosts = 0;
+	STRING.assign(5000000, 'a');
+	STRING.clear();
+	//STRING.resize(400);
 
-	for (int x = 0; x < 257; x++)// To get you all the lines.
+	for (int x = 0; x < 256; x++)// To get you all the lines.
 	{
 		getline(infile, STRING);
 		atCount = STRING.find(";@");
@@ -982,25 +985,21 @@ string getFile2()
 			//cout << "end counting file";
 			return "";
 		}
-		else if(atCount != std::string::npos)
+		else
 		{
 			tempFileLines3[x] += STRING;
 			
-			for (int x = 0; x < atCount + 2; x++)
+			for (int i = 0; i < atCount + 2; i++)
 			{
-				temp244[x] = STRING.at(x);
+				temp244[i] = STRING.at(i);
 				fileCount++;
 			}
 			numberOfPosts++;
 		}
-		else
-		{
-			tempFileLines3[x] = "\n";
-		}
 
 		STRING.assign(400000, 'a');
 		STRING.clear();
-		STRING.resize(400000);
+		//STRING.resize(400000);
 	}
 	infile.close();
 
@@ -2013,21 +2012,21 @@ int main()
 	{
 		baseArray[x].assign(5000, 'a');
 		baseArray[x].clear();
-		baseArray[x].resize(5000);
+		//baseArray[x].resize(5000);
 	}
 
 	for (int x = 0; x < 64; x++)
 	{
 		commentArray[x].assign(2000, 'a');
 		commentArray[x].clear();
-		commentArray[x].resize(2000);
+		//commentArray[x].resize(2000);
 	}
 
 	for (int x = 0; x <= 256; x++)
 	{
 		listString[x].assign(2000, 'a');
 		listString[x].clear();
-		listString[x].resize(2000);
+		//listString[x].resize(2000);
 	}
 
 	number26.assign('a', 3);
@@ -2189,13 +2188,15 @@ int main()
 		file2.push_back(temp244[x]);
 	}
 
-	file2.shrink_to_fit();
+	//file2.shrink_to_fit();
 
 	//ListPost();
 	temp = listPost();  //stack overflow??
+
+	/*
 	for (int x = 0; x <= 255 && listString[x].length() != 0; x++)
 	{
-		listString[x].shrink_to_fit();
+		//listString[x].shrink_to_fit();
 		strOutData.append(listString[x].c_str());
 		strOutData.append("\r\n");
 	}
@@ -2226,8 +2227,8 @@ int main()
 	}
 
 	strOutData.append("</body></html>");
-	strOutData.shrink_to_fit();
-
+	//strOutData.shrink_to_fit();
+	*/
 	//strcpy_s(htmlOut, (const char*)strOutData.c_str());
 
 	//printf(strOutData.c_str());
@@ -3271,6 +3272,8 @@ int main()
 		}
 		else if (strcmp(input.c_str(), "list") == 0)
 		{
+			//getFile2();  //when called first before any command
+
 			std::cin.clear();
 			for (int x = 0; x <= 256; x++)
 			{
