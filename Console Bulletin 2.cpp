@@ -987,7 +987,7 @@ string getFile2()
 		}
 		else
 		{
-			tempFileLines3[x] += STRING;
+			tempFileLines3[x].assign(STRING);
 			
 			for (int i = 0; i < atCount + 2; i++)
 			{
