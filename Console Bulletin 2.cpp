@@ -14,7 +14,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <locale>
-#include <FormatDelim.h>
+#include <C:\Users\kenzo\source\repos\Console Bulletin 2\Console Bulletin 2\FormatDelim.h>
 #include <regex>
 
 
@@ -1025,7 +1025,7 @@ string getFile2()
 
 	if (current_filename.length() > 15) // the file name is "Bulletin.txt" which is shorter than log file name with dates added
 	{
-		for (int x = 0; x < 257; x++)
+		for (int x = 0; x < 256; x++)
 		{
 			tempFileLines3[x].assign(400000, 'a');
 			tempFileLines3[x].clear();
@@ -1050,16 +1050,17 @@ string getFile2()
 		}
 
 		fileItSelf2.clear();
-		fileItSelf2 += tempFileLines[0];
+		fileItSelf2 += tempFileLines4[0];
 		numPosts = 256;
 		numberOfPosts = 256;
-		
+
 		int currentPos = 0;
 		int startPos = -1;
+
 		for (int x = 0; x <= 256; x++)
 		{
-			currentPos = tempFileLines4[0].find('/n', currentPos + 1); //include endl char
-			tempFileLines3[x] += (tempFileLines4[0].substr(startPos + 1, currentPos)); //skip endl char
+			currentPos = tempFileLines4[0].find('\n', currentPos + 1);
+			tempFileLines3[x] += (tempFileLines4[0].substr(startPos + 1, currentPos - startPos - 1));
 			startPos = currentPos;
 		}
 	}
@@ -1491,7 +1492,7 @@ string _GetComments(int headingNumber2)
 	*/
 	
 	//check for unwanted calls
-	if (headingNumber2 <= 0 || headingNumber2 >= 256 || temp244[0] == '/n')
+	if (headingNumber2 <= 0 || headingNumber2 >= 256 || temp244[0] == '\n')
 	{
 		std::cout << "post number out of range";
 		std::cout << "\r\n";
@@ -4001,5 +4002,3 @@ int main()
 //cout <<  output;
 //cout << ("nothing is being read from the file");
 //outputFinalHtml(juggerknot);
-
-
