@@ -81,7 +81,7 @@ int headerNum = 0;
 int _headingNumber = 0;
 int counter = 0;
 //int outputFinalHtml(int);
-int exists[INT16_MAX];
+int exists[4];
 int exisits_index = 0;
 char temp244[50000000];
 int numPosts;
@@ -239,7 +239,7 @@ void NewItemExpanded(int, int, int)
 
 	int numberOfComments = 0;
 	string header2 = "";
-	header2.assign('a', 4000);
+	header2.assign(4000, 'a');
 	header2.clear();
 	//header2.resize(4000);
 
@@ -488,11 +488,11 @@ void Comments()
 	_depth2 = -1;
 	int index = 0;
 	string header = "";
-	header.assign('a', 400);
+	header.assign(400, 'a');
 	header.clear();
 	//header.resize(400);
 	string header2 = "";
-	header2.assign('a', 4000);
+	header2.assign(4000, 'a');
 	header2.clear();
 	//header2.resize(4000);
 
@@ -4000,8 +4000,11 @@ int main()
 			input.assign(input2, count_input);
 		}
 	}
+	std::cout << "Press Enter to exit..."; std::cin.get(); // waits for Enter
+	return 0;
 }
 //system("PAUSE");
 //cout <<  output;
 //cout << ("nothing is being read from the file");
+
 //outputFinalHtml(juggerknot);
