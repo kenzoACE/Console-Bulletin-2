@@ -3559,7 +3559,7 @@ int main()
 					_GetComments(master_postNum);
 					Comments();
 
-					for (int x = 0; x < numberOfComments; x++)
+					for (int x = 0; x < numberOfComments - 1; x++)
 					{
 						std::cout << obj->set(baseArray[x]);
 						std::cout << "\r\n";
@@ -4008,4 +4008,5 @@ int main()
 //cout << ("nothing is being read from the file");
 
 //outputFinalHtml(juggerknot);
+
 
