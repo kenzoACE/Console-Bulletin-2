@@ -1491,7 +1491,7 @@ string _GetComments(int headingNumber2)
 	*/
 	
 	//check for unwanted calls
-	if (headingNumber2 <= 0 || headingNumber2 >= 256 || temp244[0] == '\n')
+	if (headingNumber2 <= 0 || headingNumber2 >= 256 || temp244[0] == '\n' || headingNumber2 - headingNum > 1)
 	{
 		std::cout << "post number out of range";
 		std::cout << "\r\n";
@@ -2405,7 +2405,7 @@ int main()
 				}
 
 				//remember the old post file name
-				std:ofstream outfile14(encryptedFileName);
+				std::ofstream outfile14(encryptedFileName);
 				outfile14 << time_str27 + current_filename;  //always should be "BulletinLog.txt"  Somehow disable editing of log files?
 				outfile14 << "\r\n";
 				outfile14.close();
@@ -2504,7 +2504,7 @@ int main()
 
 				getFile2();
 
-				//numPosts = 0;
+				numPosts = 0;
 				for (int x = 0; x < 257; x++)
 				{
 					std::size_t pos2 = tempFileLines3[x].find(":@"); // Find the position of '\n'
@@ -4008,3 +4008,4 @@ int main()
 //cout << ("nothing is being read from the file");
 
 //outputFinalHtml(juggerknot);
+
