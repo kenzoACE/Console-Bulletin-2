@@ -1017,7 +1017,7 @@ string getFile2()
 
 			for (int i = 0; i < atCount + 2; i++)
 			{
-				temp244[i] = STRING.at(i);
+				temp244[fileCount] = STRING.at(i);
 				fileCount++;
 			}
 			numberOfPosts++;
@@ -4045,4 +4045,5 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
+
 // outputFinalHtml(juggerknot);
