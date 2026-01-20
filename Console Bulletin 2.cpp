@@ -2773,7 +2773,7 @@ int main()
 				count_input = 0;
 
 				temp = _GetComments(_heading);
-				if (strcmp(commentNumber2.c_str(), "0") != 0 && !isNumber(commentNumber2) || strcmp(temp.c_str(), "COMMENT_NOT_FOUND") == 0)
+				if ((strcmp(commentNumber2.c_str(), "0") != 0 && !isNumber(commentNumber2)) || (strcmp(temp.c_str(), "COMMENT_NOT_FOUND") == 0 && std::stoi(commentNumber2) != 0))
 				{
 					std::cout << ("invalid comment number, please enter an another comment number: ");
 
@@ -2797,7 +2797,7 @@ int main()
 				std::cout << std::boolalpha;													  // Print bools as true/false
 				std::cout << "Is the string a number: " << isNumber(commentNumber2) << std::endl; // Should output true
 
-				if (strcmp(commentNumber2.c_str(), "0") != 0 && !isNumber(commentNumber2) || strcmp(temp.c_str(), "COMMENT_NOT_FOUND") == 0)
+				if ((strcmp(commentNumber2.c_str(), "0") != 0 && !isNumber(commentNumber2)) || (strcmp(temp.c_str(), "COMMENT_NOT_FOUND") == 0 && std::stoi(commentNumber2) != 0))
 				{
 					std::cout << "invalid comment number again, exiting program"; // this should not be hit
 					std::cout << "\n";
@@ -3820,7 +3820,7 @@ int main()
 								baseIndex = 0;
 								Comments();
 
-								for (int x = 0; x < numberOfComments; x++)
+								for (int x = 0; x < numberOfComments - 1; x++)
 								{
 									std::cout << obj->set(baseArray[x]);
 									std::cout << "\r\n";
@@ -4041,4 +4041,5 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
+
 // outputFinalHtml(juggerknot);
