@@ -3149,7 +3149,7 @@ int main()
 							strftime(buf, sizeof(buf), "%Y/%m/%d.%X", &tstruct); // Format the time
 							time_str24 = (buf);									 // Append the formatted time to the string
 
-							int temp_index2 = numberOfComments + 1;
+							int temp_index2 = numberOfComments + 2;
 							std::string s10 = std::to_string(temp_index2);
 
 							// skip dlilimiter
@@ -4049,4 +4049,5 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
 
