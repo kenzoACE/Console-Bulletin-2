@@ -13,7 +13,8 @@
 #include <vector>
 // #include <Windows.h>
 //#include <locale>
-#include <C:\Users\kenzo\source\repos\Console Bulletin 2\Console Bulletin 2\FormatDelim.h>
+//#include "FormatDelim.h"
+#include <C:\Users\kenzo\source\repos\ConsoleApplication3\ConsoleApplication3\FormatDelim.h>
 #include <regex>
 //#include "FormatDelim.h"
 
@@ -258,7 +259,7 @@ void NewItemExpanded(int, int, int)
 	header2 += (baseArray[globalcounter - 1].c_str());
 
 	int y = 0;
-	for (int x = 0; x < 64 && commentArray[x].length() > 3; x++)
+	for (int x = 0; x < 64 && strcmp(commentArray[x].c_str(), "") != 0; x++)
 	{
 		y++;
 	}
@@ -476,7 +477,9 @@ void Comments()
 	int count = 0;
 	globalcounter = 0;
 	currentCommentNum2 = 0;
-	;
+	string temp = "";
+	temp.assign(5000, 'a');
+	temp.clear();
 	int numberOfComments = 1;
 	int nextCommentNum = 1;
 	string returnString[65];
@@ -514,7 +517,7 @@ void Comments()
 	// temp5 += (":@" + temp);
 	// temp5.shrink_to_fit();
 
-	// temp = _GetComments(stoi(postNum2)); // fill in the commentArray array
+	temp = _GetComments(stoi(postNum2)); // fill in the commentArray array
 
 	// reset globalcounter
 	globalcounter = 0;
@@ -1499,27 +1502,21 @@ string _GetComments(int headingNumber2)
 	// indexstring.resize(8);
 
 	// set number of posts here
-	/*listPost();
-	int y = 0;
-	int arrayPos = 0;
-	for (int x = 0; x < 64; x++)
+	numPosts = 0;
+	for (int x = 0; x < 257; x++)
 	{
-		std::size_t pos2 = listString[x].find(":@");
-		if (master_postNum == arrayPos)
+		if (strcmp(tempFileLines3[x].c_str(), "") != 0)
 		{
-			arrayPos = x;
-			y++;
-			break;
+			numPosts++;
 		}
-		else {
-			y++;
+		else
+		{
+			x = 258;
 		}
 	}
-	numPosts = y;
-	*/
 
 	// check for unwanted calls
-	if (headingNumber2 <= 0 || headingNumber2 >= 256 || temp244[0] == '\n' || headingNumber2 - headingNum > 1)
+	if (headingNumber2 <= 0 || headingNumber2 >= 256 || temp244[0] == '\n')
 	{
 		std::cout << "post number out of range";
 		std::cout << "\r\n";
@@ -1543,7 +1540,7 @@ string _GetComments(int headingNumber2)
 
 		findPost = fileComment2.find(":@;@", findPost);
 
-		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
+		if (stoi(fileComment2.substr(0, 2)) == headingNumber2)
 		{
 			break;
 		}
@@ -1619,6 +1616,7 @@ string _GetComments(int headingNumber2)
 			catch (exception e)
 			{
 				_comment = "COMMENT_NOT_FOUND";
+				break;
 			}
 		}
 		else
@@ -1633,6 +1631,7 @@ string _GetComments(int headingNumber2)
 			catch (exception e)
 			{
 				_comment = "COMMENT_NOT_FOUND";
+				break;
 			}
 		}
 		/*
@@ -1661,25 +1660,8 @@ string _GetComments(int headingNumber2)
 
 	counter = 0;
 
-	if (strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") == 0)
-	{
-		return "COMMENT_NOT_FOUND";
-	}
-
-	int index2 = 0; // reset index6
-	int lastIndex5;
-	int index3 = 0;
-	// skip main post field
-	lastIndex5 = index2;
-
-	// post0.resize(50000);
-
-	std::size_t last = fileComment2.find(":@;@", index3);
-
-	//_comment.clear();
-	// _comment = fileComment2.substr(2, fileComment2.length() - 6);
-
 	// no comments check used to return FIRST_COMMENT
+	index_global = 0;
 	try
 	{
 		std::size_t length23 = fileComment2.find(":@", index_global + 2);
@@ -1705,6 +1687,26 @@ string _GetComments(int headingNumber2)
 		_comment += ("FIRST_COMMENT");
 		return _comment;
 	}
+	
+	if (strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") == 0)
+	{
+		return "COMMENT_NOT_FOUND";
+	}
+
+	int index2 = 0; // reset index6
+	int lastIndex5;
+	int index3 = 0;
+	// skip main post field
+	lastIndex5 = index2;
+
+	// post0.resize(50000);
+
+	std::size_t last = fileComment2.find(":@;@", index3);
+
+	//_comment.clear();
+	// _comment = fileComment2.substr(2, fileComment2.length() - 6);
+
+	
 
 	/*
 	number = stoi(comments3.substr(0, 3).c_str());
@@ -2213,7 +2215,7 @@ int main()
 
 	// ListPost();
 	temp = listPost(); // stack overflow??
-	for (int x = 0; x <= 255 && listString[x].length() != 0; x++)
+	for (int x = 0; x <= 255 && strcmp(listString[x].c_str(), "") != 0; x++)
 	{
 		listString[x].shrink_to_fit();
 		strOutData.append(listString[x].c_str());
@@ -2231,14 +2233,14 @@ int main()
 	child.resize(10);
 	// child.append(Children());
 
-	for (int x = 0; x < 64 && children[x].length() != 0; x++)
+	for (int x = 0; x < 64 && strcmp(children[x].c_str(), "") != 0; x++)
 	{
 		//		strOutData.append(children[x][0]);
 	}
 
 	//	strOutData.append("\r\n");
 
-	for (int x = 0; x < 64 && baseArray[x].length() != 0; x++)
+	for (int x = 0; x < 64 && strcmp(baseArray[x].c_str(), "") != 0; x++)
 	{
 		baseArray[x].shrink_to_fit();
 		strOutData.append(baseArray[x]);
@@ -2678,15 +2680,16 @@ int main()
 		{
 			int array_index = 0;
 			numPosts = 0;
+			
 			for (int x = 0; x < 257; x++)
 			{
-				if (tempFileLines3[x].length() > 1)
+				if (strcmp(tempFileLines3[x].c_str(), "") != 0)
 				{
 					numPosts++;
 				}
 				else
 				{
-					break;
+					x = 258;
 				}
 			}
 			numPosts++;
@@ -2880,13 +2883,13 @@ int main()
 				}
 				else // inputs all normal
 				{
-					std::string::size_type pos = 0;
+/*					std::string::size_type pos = 0;
 					while ((pos = post3.find(":@", pos)) != std::string::npos)
 					{
 						post3.erase(pos, 2);
 						post3.insert(pos, " ");
 					}
-
+*/
 					// reread from file to fill in tempFileLinesy3 array
 					getFile2();
 
@@ -3038,11 +3041,11 @@ int main()
 							// Remove NULL characters before writing
 							tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 							outFile22 << tempFileLines3[x];
-
-							if (tempFileLines3[x].length() > 0)
+												
+							if (strcmp(tempFileLines3[x].c_str(), "") != 0)
 							{
 								countClone++;
-							}
+							}						
 
 							outFile22 << "\n";
 						}
@@ -3098,7 +3101,6 @@ int main()
 								string indexSubstr;
 								indexSubstr.assign('a', 3);
 								indexSubstr.clear();
-								indexSubstr.resize(3);
 								indexSubstr += (tempFileLines3[x].substr(0, 2));
 								int currentNumber = std::stoi(indexSubstr);
 								globalcounter++;
@@ -3188,7 +3190,9 @@ int main()
 							}
 
 							int finalCommentNum = 0;
-							for (int x = 0; commentArray[x].length() != 0; x++)
+							numPosts = 0;
+							
+							for (int x = 0; strcmp(commentArray[x].c_str(), "") != 0; x++)
 							{
 								finalCommentNum++;
 							}
@@ -3323,7 +3327,7 @@ int main()
 
 			FormatDelim* obj = new FormatDelim(":@");
 
-			for (int x = 0; x < 257 && listString[x].length() != 0 && numberOfPosts <= x; x++)
+			for (int x = 0; x < 257 && strcmp(listString[x].c_str(), "") != 0 && numberOfPosts <= x; x++)
 			{
 				listString[x] = listString[x].substr(0, listString[x].length()); // Use substr to ensure modification.
 				std::cout << (obj->set(listString[x].c_str()));
@@ -3490,13 +3494,13 @@ int main()
 			numPosts = 0;
 			for (int x = 0; x < 257; x++)
 			{
-				if (tempFileLines3[x].length() > 1)
+				if(strcmp(tempFileLines3[x].c_str(), "") != 0)
 				{
 					numPosts++;
 				}
 				else
 				{
-					break;
+					x = 258;
 				}
 			}
 
@@ -3587,7 +3591,7 @@ int main()
 					_GetComments(master_postNum);
 					Comments();
 
-					for (int x = 0; x < numberOfComments - 1; x++)
+					for (int x = 0; x < numberOfComments && strcmp(baseArray[x].c_str(), "") != 0; x++)
 					{
 						std::cout << obj->set(baseArray[x]);
 						std::cout << "\r\n";
@@ -3723,7 +3727,7 @@ int main()
 						baseIndex = 0; // set global variable
 						Comments();
 
-						for (int x = 0; x < numberOfComments; x++)
+						for (int x = 0; x < numberOfComments && strcmp(baseArray[x].c_str(), "") != 0; x++)
 						{
 							std::cout << obj->set(baseArray[x]);
 							std::cout << "\r\n";
@@ -3820,7 +3824,7 @@ int main()
 								baseIndex = 0;
 								Comments();
 
-								for (int x = 0; x < numberOfComments - 1; x++)
+								for (int x = 0; x < numberOfComments; x++)
 								{
 									std::cout << obj->set(baseArray[x]);
 									std::cout << "\r\n";
@@ -3909,10 +3913,10 @@ int main()
 			oldFileNum.resize(4);
 			int y = 0;
 
-			for (int x = 0; fileOldNames[x].length() > 0; x++)
+			for (int x = 0; strcmp(fileOldNames[x].c_str(), "") != 0; x++)
 			{
 				oldFileNum = std::to_string(y); // Convert x to string;
-				if (fileOldNames[x].length() > 7)  //just to check for manual eracing of old file names from file
+				if (strcmp(fileOldNames[x].c_str(), "") != 0)  //just to check for manual eracing of old file names from file
 				{
 					std::cout << oldFileNum + " " + fileOldNames[x] + "\r\n";
 					y = x + 1;
@@ -4041,5 +4045,4 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
-
 // outputFinalHtml(juggerknot);
