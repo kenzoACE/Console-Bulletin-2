@@ -1975,7 +1975,7 @@ string _GetComments(int headingNumber2)
 
 	if (isOneDigit)
 	{
-		fileComment2 = (fileComment2.substr(index_global + 4, fileComment2.length() - 2));
+		fileComment2 = (fileComment2.substr(index_global + 3, fileComment2.length() - 2));
 	}
 	else
 	{
@@ -2134,18 +2134,6 @@ string _GetComments(int headingNumber2)
 	int number2 = 0;
 	int number1 = 0;
 	int number4 = 0;
-
-	//skip the post field
-	std::size_t commentIndex3 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex3;
-	std::size_t commentIndex32 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex32;
-	std::size_t commentIndex33 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex33;
-	std::size_t commentIndex43 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex43;
-	std::size_t commentIndex44 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex44;
 	
 	// go through the comments and extract each comment and put in array
 	for (int x = 0; x < 64; x++)
@@ -4368,3 +4356,4 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
