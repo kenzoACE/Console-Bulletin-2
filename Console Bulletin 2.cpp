@@ -1975,11 +1975,11 @@ string _GetComments(int headingNumber2)
 
 	if (isOneDigit)
 	{
-		fileComment2 = (fileComment2.substr(index_global + 3, fileComment2.length() - 2));
+		fileComment2 = (fileComment2.substr(index_global + 2, fileComment2.length() - 2));
 	}
 	else
 	{
-		fileComment2 = (fileComment2.substr(index_global + 4, fileComment2.length() - 3));
+		fileComment2 = (fileComment2.substr(index_global + 3, fileComment2.length() - 3));
 	}
 
 	post0 += fileComment2;
@@ -4356,4 +4356,5 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
 
