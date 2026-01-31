@@ -3497,8 +3497,8 @@ int main()
 						{
 							int commentPositionToInsert = 0;
 
-							//_GetComments(_heading);
-							_getNumComments(_heading, stoi(postNum2.c_str()));
+							_GetComments(_heading);
+							_getNumComments(_heading, stoi(postNum2.c_str()));  //this function relies on _GetComments function
 
 							if (isNumber(commentNumber2))
 							{
@@ -4366,4 +4366,5 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
+
 // outputFinalHtml(juggerknot);
