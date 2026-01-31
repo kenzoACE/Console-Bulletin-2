@@ -1472,7 +1472,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 	fileComment2.assign(temp244, 400000);
 
 	string comments3;
-	comments3.assign(500000, 'a');
+	comments3.assign(50000, 'a');
 	comments3.clear();
 	// comments3.resize(50000);
 
@@ -1702,19 +1702,6 @@ int _getNumComments(int postNum7, int headingNumber7)
 	int number1 = 0;
 	int number4 = 0;
 
-	//skip the post field
-	std::size_t commentIndex3 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex3;
-	std::size_t commentIndex32 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex32;
-	std::size_t commentIndex33 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex33;
-	std::size_t commentIndex43 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex43;
-	std::size_t commentIndex44 = post0.find(":@", index_global2 + 2);
-	index_global2 = commentIndex44;
-
-
 	// go through the comments and extract each comment and put in array
 	for (int x = 0; x < 64; x++)
 	{
@@ -1783,23 +1770,13 @@ int _getNumComments(int postNum7, int headingNumber7)
 		}
 
 		number3 = post0.find(tempComment); // this does not work for some reason, always set to 0
-		number2 = post0.length();
+		number2 = tempComment.size();
 		number1 = post0.find(";@");
 		number4 = tempComment.length();
 
-		// for some reason, first comment has delimiter included in tempComment extraction; one character
-		if (x != 0)
-		{
-			commentArray[x] += tempComment;
-		}
-		else
-		{
-			commentArray[x] += tempComment.substr(1, tempComment.length());
-		}
-
 		numberOfComments++;
 
-		if (number1 - number3 - number4 < 70) // should only be about 3. The date and time field is about 24.
+		if (number1 - number3 + number2 < 70) // should only be about 3. The date and time field is about 24.
 		{
 			break;
 		}
@@ -2203,14 +2180,14 @@ string _GetComments(int headingNumber2)
 		}
 
 		number3 = post0.find(tempComment); // this does not work for some reason, always set to 0
-		number2 = post0.length();
+		number2 = tempComment.size();
 		number1 = post0.find(";@");
 		number4 = tempComment.length();
 
 		commentArray[x] += tempComment;
 		numberOfComments++;
 
-		if (number1 - number3 - number4 < 70) // should only be about 3. The date and time field is about 24.
+		if (number1 - number3 + number2 < 70) // should only be about 3. The date and time field is about 24.
 		{
 			break;
 		}
@@ -4354,7 +4331,4 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
-
 // outputFinalHtml(juggerknot);
-
-
