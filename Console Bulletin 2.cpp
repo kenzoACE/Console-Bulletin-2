@@ -2269,7 +2269,8 @@ int main()
 		count_input++; // This variable can be used if you need the count later on.
 	}
 	input.assign(list2, count_input);
-	std::string::size_type pos = 0u;
+
+	/*std::string::size_type pos = 0u;
 	while ((pos = input.find(":@", pos)) != std::string::npos)
 	{
 		name3.replace(pos, 2, " ");
@@ -2277,6 +2278,7 @@ int main()
 	}
 
 	input.resize(count_input);
+	*/
 
 	name3.assign(50, 'a');
 	name3.clear();
@@ -4045,4 +4047,5 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
+
 // outputFinalHtml(juggerknot);
