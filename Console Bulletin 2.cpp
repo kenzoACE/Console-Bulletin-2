@@ -1381,10 +1381,10 @@ string listPost()
 			second = temp13;
 			std::size_t temp14 = tempFileLines3[counter].find(":@", second + 2);
 			second = temp14;
-			std::size_t temp15 = tempFileLines3[counter].find(":@", second + 2);
+			std::size_t temp15 = tempFileLines3[counter].find(";@", second + 2);
 			second = temp15;
 
-			std::size_t temp16 = tempFileLines3[counter].find(":@", second + 2);
+			std::size_t temp16 = tempFileLines3[counter].find(";@", second + 2);
 			offset = temp16;
 			// second6 += temp16;
 
@@ -1524,7 +1524,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 		index_global = length61;
 		std::size_t length63 = fileComment2.find(":@", index_global + 2);
 		index_global = length63;
-		std::size_t length62 = fileComment2.find(":@", index_global + 2);
+		std::size_t length62 = fileComment2.find(";@", index_global + 2);
 		index_global = length62;
 
 		fileComment2 = fileComment2.substr(findPost, index_global - /*findPost*/ + 4);
@@ -1569,7 +1569,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 	index_global = length51;
 	std::size_t length52 = fileComment2.find(":@", index_global + 2);
 	index_global = length52;
-	std::size_t length53 = fileComment2.find(":@", index_global + 2);
+	std::size_t length53 = fileComment2.find(";@", index_global + 2);
 	index_global = length53;
 
 	// check for two digit comment number
@@ -1641,7 +1641,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 		tempindex = index21;
 		std::size_t length21 = temp.find(":@", tempindex + 2);
 		tempindex = length21;
-		std::size_t length22 = temp.find(":@", tempindex + 2);
+		std::size_t length22 = temp.find(";@", tempindex + 2);
 		tempindex = length22;
 
 		index_global = tempindex;
@@ -1724,7 +1724,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 		index_global2 = commentIndex32;
 		std::size_t commentIndex42 = temp.find(":@", index_global2 + 2);
 		index_global2 = commentIndex42;
-		std::size_t commentIndex43 = temp.find(":@", index_global2 + 2);
+		std::size_t commentIndex43 = temp.find(";@", index_global2 + 2);
 		index_global2 = commentIndex43;
 		// index9 = commentIndex43;
 		// test the comment number, 1:@ will be temp="@1" and 12:@ will be temp="12" which will through a stoi argument exception
@@ -1914,7 +1914,7 @@ string _GetComments(int headingNumber2)
 			index_global = length33;
 			std::size_t length32 = fileComment2.find(":@", index_global + 2);
 			index_global = length32;
-			std::size_t length42 = fileComment2.find(":@", index_global + 2);
+			std::size_t length42 = fileComment2.find(";@", index_global + 2);
 			index_global = length42;
 
 			fileComment2 = fileComment2.substr(findPost, index_global);
@@ -1930,7 +1930,7 @@ string _GetComments(int headingNumber2)
 		index_global = length21;
 		std::size_t length22 = fileComment2.find(":@", index_global + 2);
 		index_global = length22;
-		std::size_t length23 = fileComment2.find(":@", index_global + 2);
+		std::size_t length23 = fileComment2.find(";@", index_global + 2);
 		index_global = length23;
 		findPost = index_global;
 	}
@@ -1951,7 +1951,7 @@ string _GetComments(int headingNumber2)
 	index_global = length27;
 	std::size_t length26 = fileComment2.find(":@", index_global + 2);
 	index_global = length26;
-	std::size_t length22 = fileComment2.find(":@", index_global + 2);
+	std::size_t length22 = fileComment2.find(";@", index_global + 2);
 	index_global = length22;
 
 	// check for two digit comment number
@@ -2039,7 +2039,7 @@ string _GetComments(int headingNumber2)
 		tempindex = index21;
 		std::size_t length21 = fileComment2.find(":@", tempindex + 2);
 		tempindex = length21;
-		std::size_t length22 = fileComment2.find(":@", tempindex + 2);
+		std::size_t length22 = fileComment2.find(";@", tempindex + 2);
 		tempindex = length22;
 
 		index_global = tempindex;
@@ -2152,7 +2152,7 @@ string _GetComments(int headingNumber2)
 		index_global2 = commentIndex32;
 		std::size_t commentIndex42 = post0.find(":@", index_global2 + 2);
 		index_global2 = commentIndex42;
-		std::size_t commentIndex43 = post0.find(":@", index_global2 + 2);
+		std::size_t commentIndex43 = post0.find(";@", index_global2 + 2);
 		index_global2 = commentIndex43;
 		// index9 = commentIndex43;
 		// test the comment number, 1:@ will be temp="@1" and 12:@ will be temp="12" which will through a stoi argument exception
@@ -2217,6 +2217,8 @@ string _GetComments(int headingNumber2)
 			break;
 		}
 
+		// update to next comment
+		post0 = post0.substr(index_global2, post0.length());
 		index9 = index_global2;
 	}
 
@@ -3441,7 +3443,7 @@ int main()
 							index_2 = temp64;
 							std::size_t temp65 = tempFileLines3[array_index].find(":@", index_2 + 2);
 							index_2 = temp65;
-							std::size_t temp66 = tempFileLines3[array_index].find(":@", index_2 + 2);
+							std::size_t temp66 = tempFileLines3[array_index].find(";@", index_2 + 2);
 							index_2 = temp66;
 
 							std::string time_str24;
@@ -3466,7 +3468,7 @@ int main()
 							index_2 += s10.length();
 							tempFileLines3[array_index].insert(index_2, ":@");
 							index_2 += 2;
-							tempFileLines3[array_index].insert(index_2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str24 + ":@");
+							tempFileLines3[array_index].insert(index_2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str24 + ";@");
 							// write the whole post array to file
 							ofstream outFile;
 							outFile.open(current_filename);
@@ -3559,12 +3561,12 @@ int main()
 							index = temp18;
 							std::size_t temp19 = tempFileLines3[array_index].find(":@", index + 2);
 							index = temp19;
-							std::size_t temp20 = tempFileLines3[array_index].find(":@", index + 2);
+							std::size_t temp20 = tempFileLines3[array_index].find(";@", index + 2);
 							index = temp20;
 
 							tempFileLines3[array_index].insert(index + 2, s9); // index should be comment insertion point
 							tempFileLines3[array_index].insert(index + 2 + s9.length(), ":@");
-							tempFileLines3[array_index].insert(index + 2 + s9.length() + 2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str23 + ":@");
+							tempFileLines3[array_index].insert(index + 2 + s9.length() + 2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str23 + ";@");
 
 							// write the whole post array to file
 							ofstream outFile;
@@ -4358,3 +4360,4 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
