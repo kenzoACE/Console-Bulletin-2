@@ -1914,8 +1914,8 @@ string _GetComments(int headingNumber2)
 			index_global = length33;
 			std::size_t length32 = fileComment2.find(":@", index_global + 2);
 			index_global = length32;
-			std::size_t length22 = fileComment2.find(":@", index_global + 2);
-			index_global = length32;
+			std::size_t length42 = fileComment2.find(":@", index_global + 2);
+			index_global = length42;
 
 			fileComment2 = fileComment2.substr(findPost, index_global);
 			break;
@@ -4356,4 +4356,5 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
+
 // outputFinalHtml(juggerknot);
