@@ -159,7 +159,6 @@ string encryptedFileName = "encrypted_filename";
 
 string input;
 
-/*
 void waitForKeyPress() {
 	std::cout << "Press 'e' to expand or 'c' to collapse: ";
 	while (true) {
@@ -190,7 +189,6 @@ void waitForKeyPress() {
 		Sleep(100); // Small delay to prevent high CPU usage
 	}
 }
-
 
 void waitForKeyInput() {
 	char key;
@@ -227,7 +225,6 @@ void waitForKeyInput() {
 		break;
 	}
 }
-*/
 
 void xorEncryptDecrypt(std::vector<char>& data, char key)
 {
@@ -749,7 +746,6 @@ void checkFileAlignment(const std::string& filePath)
 	file.close();
 }
 
-/*
 void clearConsole() {
 	COORD topLeft = { 0, 0 };
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -761,7 +757,6 @@ void clearConsole() {
 	FillConsoleOutputAttribute(console, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE, screen.dwSize.X * screen.dwSize.Y, topLeft, &written);
 	SetConsoleCursorPosition(console, topLeft);
 }
-*/
 
 bool isNumber(const std::string& str)
 {
@@ -1533,7 +1528,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 		//fileComment2 = fileComment2.substr(findPost + 2, fileComment2.length() - findPost + 2);
 		
 
-		//findPost = fileComment2.find(":@;@", findPost);
+		findPost = index_global;
 		headingNum++;
 
 		//found the post
@@ -4360,4 +4355,5 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
 
