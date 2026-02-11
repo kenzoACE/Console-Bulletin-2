@@ -3345,7 +3345,6 @@ int main()
 							cout << "\r\n";
 							system("PAUSE");
 							break;//exiting main loop for program kill
-
 						}
 
 						// write the whole post array to file
@@ -3443,7 +3442,7 @@ int main()
 							_GetComments(_heading);
 							numberOfComments =_getNumComments(_heading, std::stoi(postNum2));  // this function rlies on _GetComments function
 							// insert the commented post to the appropriate position
-							std::size_t temp13 = tempFileLines3[array_index].find(":@", 0); // insert the first comment at the end position
+							std::size_t temp13 = tempFileLines3[array_index].find(":@", 0); // insert the first comment at the beggining of comments position
 							index_2 = temp13;
 							std::size_t temp63 = tempFileLines3[array_index].find(":@", index_2 + 2);
 							index_2 = temp63;
@@ -3470,6 +3469,9 @@ int main()
 							int temp_index2 = numberOfComments + 1; //accounting that the data file is filled comments.  Can adjust to 47 in the function (both _GetComments and _getNumComments).
 							std::string s10 = std::to_string(temp_index2);
 
+							// update for delimiter ";@"
+							index_2++;
+							index_2++;
 							tempFileLines3[array_index].insert(index_2, s10);
 							index_2 += s10.length();
 							tempFileLines3[array_index].insert(index_2, ":@");
@@ -3569,7 +3571,13 @@ int main()
 							index = temp19;
 							std::size_t temp20 = tempFileLines3[array_index].find(":@", index + 2);
 							index = temp20;
+							std::size_t temp22 = tempFileLines3[array_index].find(";@", index + 2);
+							index = temp22;
 
+							// skip delimiter
+							index++;
+							index++;
+							
 							tempFileLines3[array_index].insert(index + 2, s9); // index should be comment insertion point
 							tempFileLines3[array_index].insert(index + 2 + s9.length(), ":@");
 							tempFileLines3[array_index].insert(index + 2 + s9.length() + 2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str23 + ";@");
@@ -4366,3 +4374,4 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
