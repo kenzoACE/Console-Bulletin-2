@@ -3470,8 +3470,6 @@ int main()
 							int temp_index2 = numberOfComments + 1; //accounting that the data file is filled comments.  Can adjust to 47 in the function (both _GetComments and _getNumComments).
 							std::string s10 = std::to_string(temp_index2);
 
-							// skip dlilimiter
-							index_2 += 2;
 							tempFileLines3[array_index].insert(index_2, s10);
 							index_2 += s10.length();
 							tempFileLines3[array_index].insert(index_2, ":@");
@@ -4366,4 +4364,5 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
+
 // outputFinalHtml(juggerknot);
