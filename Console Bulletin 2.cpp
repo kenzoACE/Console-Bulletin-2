@@ -159,6 +159,7 @@ string encryptedFileName = "encrypted_filename";
 
 string input;
 
+/*
 void waitForKeyPress() {
 	std::cout << "Press 'e' to expand or 'c' to collapse: ";
 	while (true) {
@@ -189,6 +190,7 @@ void waitForKeyPress() {
 		Sleep(100); // Small delay to prevent high CPU usage
 	}
 }
+
 
 void waitForKeyInput() {
 	char key;
@@ -225,6 +227,7 @@ void waitForKeyInput() {
 		break;
 	}
 }
+*/
 
 void xorEncryptDecrypt(std::vector<char>& data, char key)
 {
@@ -746,6 +749,7 @@ void checkFileAlignment(const std::string& filePath)
 	file.close();
 }
 
+/*
 void clearConsole() {
 	COORD topLeft = { 0, 0 };
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -757,6 +761,7 @@ void clearConsole() {
 	FillConsoleOutputAttribute(console, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE, screen.dwSize.X * screen.dwSize.Y, topLeft, &written);
 	SetConsoleCursorPosition(console, topLeft);
 }
+*/
 
 bool isNumber(const std::string& str)
 {
@@ -1376,10 +1381,10 @@ string listPost()
 			second = temp13;
 			std::size_t temp14 = tempFileLines3[counter].find(":@", second + 2);
 			second = temp14;
-			std::size_t temp15 = tempFileLines3[counter].find(";@", second + 2);
+			std::size_t temp15 = tempFileLines3[counter].find(":@", second + 2);
 			second = temp15;
 
-			std::size_t temp16 = tempFileLines3[counter].find(";@", second + 2);
+			std::size_t temp16 = tempFileLines3[counter].find(":@", second + 2);
 			offset = temp16;
 			// second6 += temp16;
 
@@ -1438,6 +1443,12 @@ int _getNumComments(int postNum7, int headingNumber7)
 
 	numberOfComments = 0;
 	getFile2(); // to fill in temp244
+
+	// check if first comment
+	if (strcmp(_comment.c_str(), "FIRST_COMMENT") == 0)
+	{
+		return 0;
+	}
 
 	for (int x = 0; x < 64; x++)
 	{
@@ -1501,7 +1512,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 	{
 		std::cout << "post number out of range";
 		std::cout << "\r\n";
-		return -1;
+		return -1; // does not use this number
 	}
 
 	int findPost = 0;
@@ -1511,16 +1522,16 @@ int _getNumComments(int postNum7, int headingNumber7)
 	{
 
 		// skip post section and jump to comments only
-		std::size_t index69 = fileComment2.find(":@", findPost);
-		index_global = index69;
-		std::size_t index61 = fileComment2.find(":@", index_global + 2);
-		index_global = index61;
-		std::size_t length61 = fileComment2.find(":@", index_global + 2);
-		index_global = length61;
-		std::size_t length63 = fileComment2.find(":@", index_global + 2);
-		index_global = length63;
-		std::size_t length62 = fileComment2.find(";@", index_global + 2);
-		index_global = length62;
+		std::size_t index19 = fileComment2.find(":@", findPost);
+		index_global = index19;
+		std::size_t index21 = fileComment2.find(":@", index_global + 2);
+		index_global = index21;
+		std::size_t length21 = fileComment2.find(":@", index_global + 2);
+		index_global = length21;
+		std::size_t length22 = fileComment2.find(":@", index_global + 2);
+		index_global = length22;
+		std::size_t length23 = fileComment2.find(";@", index_global + 2);
+		index_global = length23;
 
 		fileComment2 = fileComment2.substr(findPost, index_global - /*findPost*/ + 4);
 		
@@ -1528,7 +1539,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 		//fileComment2 = fileComment2.substr(findPost + 2, fileComment2.length() - findPost + 2);
 		
 
-		findPost = index_global;
+		findPost = fileComment.find(";@", findPost + 2);
 		headingNum++;
 
 		//found the post
@@ -1556,16 +1567,16 @@ int _getNumComments(int postNum7, int headingNumber7)
 	// fileComment2 = fileComment2.substr(0, findPost + 4);
 
 	// skip post section and jump to comments only
-	std::size_t index59 = fileComment2.find(":@", 0);
-	index_global = index59;
-	std::size_t index51 = fileComment2.find(":@", index_global + 2);
-	index_global = index51;
-	std::size_t length51 = fileComment2.find(":@", index_global + 2);
-	index_global = length51;
-	std::size_t length52 = fileComment2.find(":@", index_global + 2);
-	index_global = length52;
-	std::size_t length53 = fileComment2.find(";@", index_global + 2);
-	index_global = length53;
+	std::size_t index19 = fileComment2.find(":@", 0);
+	index_global = index19;
+	std::size_t index21 = fileComment2.find(":@", index_global + 2);
+	index_global = index21;
+	std::size_t length21 = fileComment2.find(":@", index_global + 2);
+	index_global = length21;
+	std::size_t length22 = fileComment2.find(":@", index_global + 2);
+	index_global = length22;
+	std::size_t length23 = fileComment2.find(";@", index_global + 2);
+	index_global = length23;
 
 	// check for two digit comment number
 	temp3.assign(200, 'a');
@@ -1668,7 +1679,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 
 	if (strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") == 0)
 	{
-		return -1;
+		return 0;
 	}
 
 	int index2 = 0; // reset index6
@@ -1704,7 +1715,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 	int number1 = 0;
 	int number4 = 0;
 
-	// go through the comments and extract each comment and put in array
+	// go through the comments and count the number of comments
 	for (int x = 0; x < 64; x++)
 	{
 		tempComment.assign(20000, 'a');
@@ -1778,7 +1789,7 @@ int _getNumComments(int postNum7, int headingNumber7)
 
 		numberOfComments++;
 
-		if (number1 - number3 + number2 < 70) // should only be about 3. The date and time field is about 24.
+		if (number1 - number3 + number2 < 43) // should only be about 3. The date and time field is about 24.  Would not work if one letter comments etc.
 		{
 			break;
 		}
@@ -1895,29 +1906,8 @@ string _GetComments(int headingNumber2)
 	//headingNum = headingNumber2;
 	// extract the post line from whole file
 	for (int x = 0; numPosts - headingNum - x != 0; x++)
-	{	
-		fileComment2 = fileComment2.substr(findPost, fileComment2.length()); // when first loop hits, does not change anything
-		
-		if (stoi(fileComment2.substr(0, 2)) == headingNumber2)
-		{
-			// gather post section with jump to comments plust post section
-			std::size_t index39 = fileComment2.find(":@", index_global);
-			index_global = index39;
-			std::size_t index31 = fileComment2.find(":@", index_global + 2);
-			index_global = index31;
-			std::size_t length33 = fileComment2.find(":@", index_global + 2);
-			index_global = length33;
-			std::size_t length32 = fileComment2.find(":@", index_global + 2);
-			index_global = length32;
-			std::size_t length42 = fileComment2.find(";@", index_global + 2);
-			index_global = length42;
-
-			fileComment2 = fileComment2.substr(findPost, index_global);
-			break;
-		}
-		
-		// skip post since not the right post
-		std::size_t index19 = fileComment2.find(":@", index_global);
+	{
+		std::size_t index19 = fileComment2.find(":@", findPost + 1);
 		index_global = index19;
 		std::size_t index21 = fileComment2.find(":@", index_global + 2);
 		index_global = index21;
@@ -1928,6 +1918,31 @@ string _GetComments(int headingNumber2)
 		std::size_t length23 = fileComment2.find(";@", index_global + 2);
 		index_global = length23;
 		findPost = index_global;
+
+		if (findPost != std::string::npos && stoi(fileComment2.substr(0, 2)) == headingNumber2)
+		{
+			// gather post section with jump to comments plust post section
+			std::size_t index19 = fileComment2.find(":@", findPost + 1);
+			index_global = index19;
+			std::size_t index21 = fileComment2.find(":@", index_global + 2);
+			index_global = index21;
+			std::size_t length21 = fileComment2.find(":@", index_global + 2);
+			index_global = length21;
+			std::size_t length22 = fileComment2.find(":@", index_global + 2);
+			index_global = length22;
+			std::size_t length23 = fileComment2.find(";@", index_global + 2);
+			index_global = length23;
+
+			fileComment2 = fileComment2.substr(findPost, index_global);
+			break;
+		}
+
+		fileComment2 = fileComment2.substr(findPost + 2, fileComment2.length());
+	}
+
+	if (strcmp(fileComment2.substr(0, 2).c_str(), ";@") == 0)
+	{
+		return "FIRST_COMMENT"; // does account for second and other comments on post it self, just need to check comment number when commenting
 	}
 
 	string post0;
@@ -1938,16 +1953,16 @@ string _GetComments(int headingNumber2)
 	// fileComment2 = fileComment2.substr(0, findPost + 4);
 
 	// skip post section and jump to comments only
-	std::size_t index10 = fileComment2.find(":@", index_global);
-	index_global = index10;
-	std::size_t index28 = fileComment2.find(":@", index_global + 2);
-	index_global = index28;
-	std::size_t length27 = fileComment2.find(":@", index_global + 2);
-	index_global = length27;
-	std::size_t length26 = fileComment2.find(":@", index_global + 2);
-	index_global = length26;
-	std::size_t length22 = fileComment2.find(";@", index_global + 2);
+	std::size_t index19 = fileComment2.find(":@", index_global);
+	index_global = index19;
+	std::size_t index21 = fileComment2.find(":@", index_global + 2);
+	index_global = index21;
+	std::size_t length21 = fileComment2.find(":@", index_global + 2);
+	index_global = length21;
+	std::size_t length22 = fileComment2.find(":@", index_global + 2);
 	index_global = length22;
+	std::size_t length23 = fileComment2.find(";@", index_global + 2);
+	index_global = length23;
 
 	// check for two digit comment number
 	temp.assign(200, 'a');
@@ -2212,8 +2227,6 @@ string _GetComments(int headingNumber2)
 			break;
 		}
 
-		// update to next comment
-		post0 = post0.substr(index_global2, post0.length());
 		index9 = index_global2;
 	}
 
@@ -3454,7 +3467,7 @@ int main()
 							strftime(buf, sizeof(buf), "%Y/%m/%d.%X", &tstruct); // Format the time
 							time_str24 = (buf);									 // Append the formatted time to the string
 
-							int temp_index2 = numberOfComments; //accounting that the data file is filled comments.  Can adjust to 47 in the function (both _GetComments and _getNumComments).
+							int temp_index2 = numberOfComments + 1; //accounting that the data file is filled comments.  Can adjust to 47 in the function (both _GetComments and _getNumComments).
 							std::string s10 = std::to_string(temp_index2);
 
 							// skip dlilimiter
@@ -3556,7 +3569,7 @@ int main()
 							index = temp18;
 							std::size_t temp19 = tempFileLines3[array_index].find(":@", index + 2);
 							index = temp19;
-							std::size_t temp20 = tempFileLines3[array_index].find(";@", index + 2);
+							std::size_t temp20 = tempFileLines3[array_index].find(":@", index + 2);
 							index = temp20;
 
 							tempFileLines3[array_index].insert(index + 2, s9); // index should be comment insertion point
@@ -4353,7 +4366,4 @@ int main()
 // system("PAUSE");
 // cout <<  output;
 // cout << ("nothing is being read from the file");
-
 // outputFinalHtml(juggerknot);
-
-
