@@ -1950,7 +1950,7 @@ string _GetComments(int headingNumber2)
 		counter++;
 	}
 
-	if (fileComment2.substr(0, 2) == ";@" || headingNumber2 == 0)
+	if (fileComment2.substr(0, 2) == ";@" || globalCommentNum == 0)
 	{
 		return "FIRST_COMMENT"; // does account for second and other comments on post it self, just need to check comment number when commenting
 	}
@@ -4388,5 +4388,6 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
 
 
