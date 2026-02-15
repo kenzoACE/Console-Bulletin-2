@@ -1922,7 +1922,7 @@ string _GetComments(int headingNumber2)
 		if (findPost != std::string::npos && stoi(fileComment2.substr(0, 2)) == headingNumber2)
 		{
 			// gather post section with jump to comments plust post section
-			std::size_t index19 = fileComment2.find(":@", findPost + 1);
+			std::size_t index19 = fileComment2.find(":@", findPost);
 			index_global = index19;
 			std::size_t index21 = fileComment2.find(":@", index_global + 2);
 			index_global = index21;
@@ -1930,19 +1930,33 @@ string _GetComments(int headingNumber2)
 			index_global = length21;
 			std::size_t length22 = fileComment2.find(":@", index_global + 2);
 			index_global = length22;
-			std::size_t length23 = fileComment2.find(";@", index_global + 2);
+			std::size_t length23 = fileComment2.find(":@;@", index_global + 2);
 			index_global = length23;
 
-			fileComment2 = fileComment2.substr(findPost, index_global);
+			fileComment2 = fileComment2.substr(findPost + 2, index_global);
 			break;
 		}
 
 		fileComment2 = fileComment2.substr(findPost + 2, fileComment2.length());
 	}
 
-	if (strcmp(fileComment2.substr(0, 2).c_str(), ";@") == 0)
+	counter = 0;
+	findPost = 0;
+	//count number of dlimiters and see if only post exists
+	while (findPost != std::string::npos && fileComment2.size() - findPost > 2)
+	{
+		std::size_t index0 = fileComment2.find(":@", findPost + 1);
+		findPost = index0;
+		counter++;
+	}
+
+	if (fileComment2.substr(0, 2) == ";@" || headingNumber2 == 0)
 	{
 		return "FIRST_COMMENT"; // does account for second and other comments on post it self, just need to check comment number when commenting
+	}
+	else if(counter < 7)
+	{
+		return "COMMENT_NOT_FOUND";
 	}
 
 	string post0;
@@ -1983,7 +1997,7 @@ string _GetComments(int headingNumber2)
 	}
 
 	// use an another string for safety purposes
-	fileComment += (fileComment2.substr(index_global, fileComment2.length() - index_global));
+	//fileComment += (fileComment2.substr(index_global, fileComment2.length() - index_global));
 
 	if (isOneDigit)
 	{
@@ -4374,4 +4388,5 @@ int main()
 // cout << ("nothing is being read from the file");
 
 // outputFinalHtml(juggerknot);
+
 
