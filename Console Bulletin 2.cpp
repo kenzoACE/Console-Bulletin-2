@@ -934,7 +934,7 @@ string getFile2()
 		cout << "\r\n";
 	}
 
-	for (int x = 0; x < 500000; x++)
+	for (int x = 0; x < 400000; x++)
 	{
 		fileItSelf2.at(x) = temp244[x];
 	}
