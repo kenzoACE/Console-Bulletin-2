@@ -910,8 +910,8 @@ string getFile2()
 
 			for (int x = 0; x < stringLength; x++)
 			{
-				temp244[atCount] = STRING.at(x);
-				atCount++;
+				temp244[fileCount] = STRING[x];
+				fileCount++;
 			}
 			numberOfPosts++;
 		}
