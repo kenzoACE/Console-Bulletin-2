@@ -894,6 +894,7 @@ string getFile2()
 	{
 		getline(infile, STRING);
 		atCount = STRING.find(";@");
+		atCount += 2;  //account for delimeter
 		
 		if (atCount == std::string::npos)
 		{
