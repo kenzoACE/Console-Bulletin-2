@@ -2984,21 +2984,14 @@ int main()
 			}
 
 			//reread from file for other purposes
-			file.clear();
-			file.resize(500000);
-			file.append(getFile2());
-			file.shrink_to_fit();
-			for (int x = 0; x < file.length(); x++)
-			{
-				temp244[x] = file.at(x);
-			}
+			getFile2();
 
 			//ListPost();
 			temp = listPost();  //stack overflow??
 			
 			FormatDelim* obj = new FormatDelim(":@");
 			
-			for (int x = 0; x < 257 && listString[x].length() != 0 && numberOfPosts <= x; x++)
+			for (int x = 0; x < 257 && listString[x].size() >= 20 && numPosts <= x; x++)
 			{
 				listString[x].shrink_to_fit();
 				std::cout << (obj->set(listString[x].c_str()));
