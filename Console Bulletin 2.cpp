@@ -2993,7 +2993,7 @@ int main()
 			
 			for (int x = 0; x < 257 && listString[x].size() >= 20 && numPosts <= x; x++)
 			{
-				listString[x].shrink_to_fit();
+				//listString[x].shrink_to_fit();
 				std::cout << (obj->set(listString[x].c_str()));
 				std::cout << ("\r\n");
 			}
