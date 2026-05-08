@@ -2273,7 +2273,7 @@ int main()
 				}
 				else
 				{
-					numberOfPosts = 1; //set to write the first post, only on first posting.
+					numberOfPosts = 0; //set to write the first post, only on first posting.
 				}
 
 				//update for new post
