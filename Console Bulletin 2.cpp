@@ -894,8 +894,8 @@ string getFile2()
 	{
 		getline(infile, STRING);
 		atCount = STRING.find(";@");
-		atCount += 2;  //account for delimeter
-		
+		atCount += 2; //account for delimiter
+
 		if (atCount == std::string::npos)
 		{
 			numberOfPosts = 0;
@@ -910,7 +910,7 @@ string getFile2()
 
 			for (int x = 0; x < stringLength; x++)
 			{
-				temp244[fileCount] = STRING[x];
+				temp244[fileCount] += STRING[x];
 				fileCount++;
 			}
 			numberOfPosts++;
@@ -927,6 +927,7 @@ string getFile2()
 	infile.close();
 
 	int tempNum = stoi(NUMBER.c_str());
+	numPosts = tempNum;
 
 	if (numberOfPosts != tempNum)
 	{
@@ -934,9 +935,11 @@ string getFile2()
 		cout << "\r\n";
 	}
 
+
+
 	for (int x = 0; x < 400000; x++)
 	{
-		fileItSelf2.at(x) = temp244[x];
+		fileItSelf2.at(x) += temp244[x];
 	}
 
 	if (current_filename.length() > 15) // the file name is "Bulletin.txt" which is shorter than log file name with dates added
@@ -1045,7 +1048,7 @@ string getFile2()
 	infile33.close();
 
 	STRING.clear();
-
+	
 	return fileItSelf2;
 }
 
@@ -2276,6 +2279,7 @@ int main()
 				//update for new post
 				//numberOfPosts++;
 				numPosts = numberOfPosts; //both global variables
+				numberOfPosts++;
 				std::string s = std::to_string(numberOfPosts);
 				char const* pchar = s.c_str();
 
@@ -2365,16 +2369,6 @@ int main()
 				}
 
 				outFile2.close();
-
-				//reread from file for other purposes
-				file.clear();
-				file.resize(500000);
-				file.append(getFile2());
-				file.shrink_to_fit();
-				for (int x = 0; x < file.length(); x++)
-				{
-					temp244[x] = file.at(x);
-				}
 			}
 
 			for (int x = 0; x < 5000, x++;)
@@ -2403,6 +2397,7 @@ int main()
 		}
 		else if (strcmp(input.c_str(), "n") == 0)
 		{
+			getFile2();  // get the array
 			int array_index = 0;
 			numPosts = 0;
 			for (int x = 0; x < 257; x++)
@@ -2992,14 +2987,14 @@ int main()
 			
 			FormatDelim* obj = new FormatDelim(":@");
 			
-			for (int x = 0; x < 257 && listString[x].size() >= 20 && numPosts <= x; x++)
+			for (int x = 0; x < 257 && listString[x].size() > 20 && numPosts <= x; x++)
 			{
 				//listString[x].shrink_to_fit();
 				std::cout << (obj->set(listString[x].c_str()));
 				std::cout << ("\r\n");
 			}
 
-			delete obj;
+			numberOfPosts = numPosts;  // set in getFile2 function			delete obj;
 			
 			//std::cout << strOutData.c_str();
 			//input.clear();
