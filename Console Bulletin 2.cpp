@@ -2093,6 +2093,7 @@ int main()
 			myReplace(name3, ";@", " ");
 
 			getFile2();
+			numberOfPosts = numPosts;  // set in getFile2 function
 			count_input = 0;
 
 			//make sure to set numberOfPost in getFile2()
