@@ -906,7 +906,7 @@ string getFile2()
 		}
 		else if(atCount != std::string::npos && atCount < 400000)
 		{
-			tempFileLines3[x] = STRING;
+			tempFileLines3[x].append(STRING.c_str());
 			
 			stringLength = STRING.find_last_of('\n'); // the return char is I think -@-
 
