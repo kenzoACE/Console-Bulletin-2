@@ -906,7 +906,7 @@ string getFile2()
 		{
 			tempFileLines3[x] = STRING;
 			
-			int stringLength = STRING.size();
+			int stringLength = STRING.length();
 
 			for (int x = 0; x < stringLength; x++)
 			{
