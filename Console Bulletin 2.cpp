@@ -908,7 +908,7 @@ string getFile2()
 		{
 			tempFileLines3[x] = STRING;
 			
-			stringLength = STRING.length();
+			stringLength = STRING.find_last_of('\n'); // the return char is I think -@-
 
 			for (int x = 0; x < stringLength; x++)
 			{
