@@ -890,6 +890,8 @@ string getFile2()
 	std::size_t atCount = 0;
 	infile.open(current_filename, std::ios::in);
 
+	int stringLength;
+	
 	for (int x = 0; x < 257; x++)// To get you all the lines.
 	{
 		getline(infile, STRING);
@@ -906,7 +908,7 @@ string getFile2()
 		{
 			tempFileLines3[x] = STRING;
 			
-			int stringLength = STRING.length();
+			stringLength = STRING.length();
 
 			for (int x = 0; x < stringLength; x++)
 			{
