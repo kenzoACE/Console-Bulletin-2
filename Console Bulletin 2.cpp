@@ -2596,16 +2596,6 @@ int main()
 					post3.insert(pos, " ");
 				}
 
-				// reread from file for other purposes
-				file.clear();
-				file.resize(500000);
-				file.append(getFile2());
-				file.shrink_to_fit();
-				for (int x = 0; x < file.length(); x++)
-				{
-					temp244[x] = file.at(x);
-				}
-
 				temp = _GetComments(_heading);
 
 				int index_5 = 0;
