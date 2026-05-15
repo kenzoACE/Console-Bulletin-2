@@ -780,10 +780,64 @@ string getFile2()
 	num50 = 1;
 	string STRING;
 	std::string NUMBER = "   ";
-	STRING.assign('a', 400000);//4MB
+	STRING.assign(4000000, 'a');//4MB
 	STRING.clear();
-	STRING.resize(400000);
+	STRING.resize(4000000);
+	//current_filename = "Bulletin.txt";
+	string enctyptedFileName;
 
+	encryptedFileName.assign(50, 'a');
+	encryptedFileName.clear();
+	encryptedFileName.resize(50);
+
+	//get archived files first
+	std::string encrypted_string = "encryptedfile1";
+	encryptedFileName.assign(base64_encode(encrypted_string));
+	ifstream infile33;
+	//infile33.imbue(std::locale("C.UTF-8"));
+
+	try {
+		infile33.open(encryptedFileName, std::ios::in);
+		if (!infile33.is_open()) {
+			throw std::ios_base::failure("File not found");
+		}
+	}
+	catch (const std::ios_base::failure& e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::wofstream outfile(encryptedFileName); // Create the file
+		//outfile.imbue(std::locale("C.UTF-8"));
+
+		if (!outfile) {
+			std::cerr << "Failed to create the file." << std::endl;
+			return fileItSelf2;
+		}
+	}
+	//infile33.getloc();
+	STRING.clear();
+
+	for (int x = 0; x < 1000 && infile33.peek() != EOF; x++)// To get you all the lines.
+	{
+		getline(infile33, STRING);
+
+		if (STRING.length() > 4)
+		{
+			fileOldNames[x].assign(50, 'a');
+			fileOldNames[x].clear(); //erase because it re-reads every time.
+			//fileOldNames[x].resize(50);
+			fileOldNames[x] += STRING;
+		}
+		else
+		{
+			cout << "unable to collect archive";
+			cout << "\r\n";
+		}
+
+		STRING.assign(400, 'a');
+		STRING.clear();
+		STRING.resize(400);
+	}
+	infile33.close();
+	
 	//initialize temp244
 	for (int x = 0; x < 500000; x++)
 	{
@@ -793,7 +847,7 @@ string getFile2()
 	char duplicate[40000] = "";
 
 	ifstream infile;
-	infile.imbue(std::locale("en_US.UTF-8"));
+	//infile.imbue(std::locale("en_US.UTF-8"));
 	//infile.open(current_filename, ios::in);
 	try {
 		infile.open(current_filename, std::ios::in);
@@ -858,8 +912,8 @@ string getFile2()
 	if (num50 == 0 || strcmp(NUMBER.c_str(), "0  ") == 0)  //only should hit when nothing posted ie. blank file
 	{
 		//initialize file if empty and used for the first time
-		wofstream outfile;
-		outfile.imbue(std::locale("en_US.UTF-8"));
+		ofstream outfile;
+		//outfile.imbue(std::locale("en_US.UTF-8"));
 		outfile.open(current_filename, ios::out);
 
 		for (int x = 0; x < 257; x++)
@@ -1005,14 +1059,14 @@ string getFile2()
 	encryptedFileName.clear();
 	encryptedFileName.resize(50);
 
-	std::string encrypted_string = "encryptedfile1";
+	//std::string encrypted_string = "encryptedfile1";
 	encryptedFileName.assign(base64_encode(encrypted_string));
-	ifstream infile33;
-	infile33.imbue(std::locale("en_US.UTF-8"));
+	ifstream infile43;
+	//infile43.imbue(std::locale("en_US.UTF-8"));
 
 	try {
-		infile33.open(encryptedFileName, std::ios::in);
-		if (!infile33.is_open()) {
+		infile43.open(encryptedFileName, std::ios::in);
+		if (!infile43.is_open()) {
 			throw std::ios_base::failure("File not found");
 		}
 	}
@@ -1027,8 +1081,9 @@ string getFile2()
 		}
 	}
 
-	infile33.getloc();
+	//infile43.getloc();
 	STRING.clear();
+	
 	for (int x = 0; x < 10000 && infile33.peek() != EOF; x++)// To get you all the lines.
 	{
 		getline(infile33, STRING);
@@ -1543,7 +1598,7 @@ string _GetComments(int headingNumber2)
 		_comment.assign(30, 'a');
 		_comment.clear();
 		_comment.resize(30);
-		_comment.append("FIRST_COMMENT");
+		_comment.assign("FIRST_COMMENT");
 		return _comment;
 	}
 
@@ -1669,7 +1724,7 @@ int main()
 	current_filename.assign(40, 'a');
 	current_filename.clear();
 	current_filename.resize(40);
-	current_filename.append("Bulletin.txt");  //set the file name to begin with, could change when reading old posts command
+	current_filename.assign("Bulletin.txt");  //set the file name to begin with, could change when reading old posts command
 	string post_string2;
 	post_string2.assign(2000, 'a');
 	post_string2.clear();
@@ -1686,6 +1741,7 @@ int main()
 	//char       buf[80];
 
 	char list2[5000];
+
 	string time_str2;
 	name3.assign(50, 'a');
 	name3.clear();
@@ -2188,7 +2244,7 @@ int main()
 				postNum4.assign(1, 'a');
 				postNum4.clear();
 				postNum4.resize(1);
-				postNum4.append("1");
+				postNum4.assign("1");
 
 				std::string s = "1";  //split the whole post and begin from post number 1.  256-129 should be showing.
 				char const* pchar = s.c_str();
@@ -3195,7 +3251,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.append("read");
+					input.assign("read");
 				}
 				else
 				{
@@ -3247,7 +3303,7 @@ int main()
 						input.assign(500, 'a');
 						input.clear();
 						input.resize(500);
-						input.append("read");
+						input.assign("read");
 					}
 				}
 			}
@@ -3302,7 +3358,7 @@ int main()
 						input.assign(500, 'a');
 						input.clear();
 						input.resize(500);
-						input.append("read");
+						input.assign("read");
 					}
 					else
 					{
@@ -3316,7 +3372,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.append("read");
+							input.assign("read");
 						}
 						catch (const std::out_of_range& e) {
 							std::cerr << "Out of range: " << e.what() << std::endl;
@@ -3324,7 +3380,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.append("read");
+							input.assign("read");
 						}
 
 						if (master_postNum == 0)
@@ -3396,7 +3452,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.append("n");
+							input.assign("n");
 							master_post = false;
 							commentNumber3 = 0;  //set the global variable for posting (default)
 						}
@@ -3408,7 +3464,7 @@ int main()
 								input.assign(500, 'a');
 								input.clear();
 								input.resize(500);
-								input.append("read");
+								input.assign("read");
 							}
 							else
 							{
@@ -3437,7 +3493,7 @@ int main()
 								input.assign(500, 'a');
 								input.clear();
 								input.resize(500);
-								input.append("read");
+								input.assign("read");
 							}
 						}
 						else if (strcmp(input.c_str(), "finish") == 0)
@@ -3451,7 +3507,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.append("read");
+							input.assign("read");
 							master_postNum = 0;
 							master_post == false;
 						}
@@ -3482,7 +3538,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.append("read");
+					input.assign("read");
 				}
 			}
 		}
@@ -3557,7 +3613,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.append("finish");
+					input.assign("finish");
 					master_post == true;
 				}
 			}
@@ -3577,7 +3633,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.append("exit");
+					input.assign("exit");
 				}
 			}
 
