@@ -888,31 +888,60 @@ string getFile2()
 	}
 
 	std::size_t atCount = 0;
-	infile.open(current_filename, std::ios::in);
+		infile.open(current_filename, std::ios::in);
 
 	int stringLength;
+	int firstDelim = 0;
+	int secondDelim = 0;
+	string tempSTRING;
+	string tempSTRING2;
+	tempSTRING.assign(400000, 'a');
+	tempSTRING.clear();
+	tempSTRING2.assign(200000, 'a');
+	tempSTRING2.clear();
+	int atCount2 = 0;
+	
+	getline(infile, STRING); //get a single line file format and work with delimeter ";@"
 	
 	for (int x = 0; x < 257; x++)// To get you all the lines.
 	{
-		getline(infile, STRING);
+		if (x == 0)
+		{
+			tempSTRING2.append(STRING);
+		}
+		else
+		{
+			//atCount2--;
+		}
+
 		atCount = STRING.find(";@");
 		atCount += 2; //account for delimiter
 
-		if (atCount == std::string::npos)
+		tempSTRING.assign(200000, 'a');
+		tempSTRING.clear();
+
+		secondDelim = tempSTRING2.find(";@", firstDelim);
+		secondDelim += 2;
+		tempSTRING.append(tempSTRING2.substr(atCount2, secondDelim));
+		firstDelim = secondDelim + 2;  // skip the delemeter
+		atCount2 = firstDelim - 1;
+
+		if (atCount2 == std::string::npos)
 		{
-			numberOfPosts = 0;
+			//numberOfPosts = x + 1;
 			//cout << "end counting file";
 			return "";
 		}
 		else if(atCount != std::string::npos && atCount < 400000)
 		{
-			tempFileLines3[x].append(STRING.c_str());
+			tempFileLines3[x].assign(tempSTRING.c_str());
 			
-			stringLength = STRING.find_last_of('\n'); // the return char is I think -@-
+			stringLength = tempSTRING.find(";@");  // the return char is I think -@-
+			stringLength += 2;
 
 			for (int x = 0; x < stringLength; x++)
 			{
-				temp244[fileCount] += STRING[x];
+				temp244[fileCount] += tempSTRING[x];
 				fileCount++;
 			}
 			numberOfPosts++;
@@ -922,11 +951,13 @@ string getFile2()
 			tempFileLines3[x] = "\r\n\n";
 		}
 
-		STRING.assign(400000, 'a');
-		STRING.clear();
-		STRING.resize(400000);
+		tempSTRING.assign(400000, 'a');
+		tempSTRING.clear();
+		tempSTRING.resize(400000);
 	}
 	infile.close();
+
+	STRING.clear();
 
 	int tempNum = stoi(NUMBER.c_str());
 	numPosts = tempNum;
