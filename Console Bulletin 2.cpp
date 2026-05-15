@@ -888,7 +888,7 @@ string getFile2()
 	}
 
 	std::size_t atCount = 0;
-		infile.open(current_filename, std::ios::in);
+	infile.open(current_filename, std::ios::in);
 
 	int stringLength;
 	int firstDelim = 0;
@@ -905,15 +905,6 @@ string getFile2()
 	
 	for (int x = 0; x < 257; x++)// To get you all the lines.
 	{
-		if (x == 0)
-		{
-			tempSTRING2.append(STRING);
-		}
-		else
-		{
-			//atCount2--;
-		}
-
 		atCount = STRING.find(";@");
 		atCount += 2; //account for delimiter
 
@@ -924,7 +915,16 @@ string getFile2()
 		secondDelim += 2;
 		tempSTRING.append(tempSTRING2.substr(atCount2, secondDelim));
 		firstDelim = secondDelim + 2;  // skip the delemeter
-		atCount2 = firstDelim - 1;
+		atCount2 = firstDelim;
+
+		if (x != 0)
+		{
+			atCount2--;
+		}
+		else
+		{
+			atCount2 = 0;
+		}
 
 		if (atCount2 == std::string::npos)
 		{
