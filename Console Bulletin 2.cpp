@@ -472,11 +472,11 @@ void Comments()
 	_depth2 = -1;
 	int index = 0;
 	string header = "";
-	header.assign('a', 400);
+	header.assign(400, 'a');
 	header.clear();
 	//header.resize(400);
 	string header2 = "";
-	header2.assign('a', 4000);
+	header2.assign(4000, 'a');
 	header2.clear();
 	//header2.resize(4000);
 
@@ -1030,7 +1030,7 @@ string getFile2()
 		outfile.close();
 	}
 */
-	encryptedFileName.assign('a', 50);
+	encryptedFileName.assign(50, 'a');
 	encryptedFileName.clear();
 	encryptedFileName.resize(50);
 
@@ -1262,7 +1262,7 @@ string listPost()
 	}
 
 	string fileList;
-	fileList.assign('a', 500000);
+	fileList.assign(500000, 'a');
 	fileList.clear();
 	fileList.resize(500000);
 
@@ -1622,7 +1622,7 @@ string _GetComments(int headingNumber2)
 			//redundant code
 			if (x != 0 && commentIndex < temp_length)
 			{
-				commentNumTest.assign('a', 5);
+				commentNumTest.assign(5, 'a');
 				commentNumTest.clear();
 				commentNumTest.resize(5);
 				commentNumTest.assign(post0.substr(commentIndex - 1, 3));
@@ -1693,10 +1693,10 @@ int main()
 	std::locale::global(std::locale("en_US.UTF-8")); // Set global locale to UTF-8
 	std::wcout.imbue(std::locale("en_US.UTF-8")); // Adjust wwcout to use the new locale
 
-	current_filename.assign('a', 40);
+	current_filename.assign(40, 'a');
 	current_filename.clear();
 	current_filename.resize(40);
-	current_filename.assign("Bulletin.txt");  //set the file name to begin with, could change when reading old posts command
+	current_filename.append("Bulletin.txt");  //set the file name to begin with, could change when reading old posts command
 	string post_string2;
 	post_string2.assign(2000, 'a');
 	post_string2.clear();
@@ -1769,7 +1769,7 @@ int main()
 	//initialize the old file name list array
 	for (int x = 0; x < 1000; x++)
 	{
-		fileOldNames[x].assign('a', 40);
+		fileOldNames[x].assign(40, 'a');
 		fileOldNames[x].clear();
 		//fileOldNames[x].resize(40);
 	}
@@ -1811,7 +1811,7 @@ int main()
 		listString[x].resize(2000);
 	}
 
-	number26.assign('a', 3);
+	number26.assign(3, 'a');
 	number26.clear();
 	number26.resize(3);
 	number26 += num[0];
@@ -1961,7 +1961,7 @@ int main()
 
 
 
-	file2.assign('a', 500000);
+	file2.assign(500000, 'a');
 	file2.clear();
 	file2.resize(500000);
 
@@ -2027,7 +2027,7 @@ int main()
 	for (int x = 0; list2[x] != '\0'; x++) {
 		count_input++; // This variable can be used if you need the count later on.
 	}
-	input.assign(list2, count_input);
+	input.assign(count_input, list2);
 	std::string::size_type pos = 0u;
 	while ((pos = input.find(":@", pos)) != std::string::npos) {
 		name3.replace(pos, 2, " ");
@@ -2103,23 +2103,22 @@ int main()
 				name3 += name[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
-			name3.assign(name, count_input);
+			name3.assign(count_input, name);
 
 			count_input = 0;
 			for (int x = 0; title[x] != '\0'; x++) {
 				title3 += title[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
-			title3.assign(title, count_input);
+			title3.assign(count_input, title);
 
 			count_input = 0;
 			for (int x = 0; post_string[x] != '\0'; x++) {
 				post3 += post_string[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
-			post3.assign(post_string, count_input);
-
-
+			post3.assign(count_input, post_string);
+			
 			//find all delimiters and replace
 			myReplace(title3, ":@", " ");
 			myReplace(title3, ";@", " ");
@@ -2415,7 +2414,7 @@ int main()
 			std::cin.clear();
 			std::cin.getline(input2, 500, '\n');
 
-			input.assign('a', 500);
+			input.assign(500, 'a');
 			input.clear();
 			input.resize(500);
 
@@ -2465,7 +2464,7 @@ int main()
 			{
 				count_input++;
 			}
-			postNum2.assign(postNumChar, count_input);
+			postNum2.assign(count_input, postNumChar);
 
 			count_input = 0;
 
@@ -2478,7 +2477,7 @@ int main()
 				std::cin.clear();
 				std::cin.getline(input2, 500, '\n');
 
-				input.assign('a', 500);
+				input.assign(500, 'a');
 				input.clear();
 				input.resize(500);
 
@@ -2511,7 +2510,7 @@ int main()
 			{
 				count_input++;
 			}
-			commentNumber2.assign(commentNumberChar, count_input);
+			commentNumber2.assign(count_input, commentNumberChar);
 
 			count_input = 0;
 
@@ -2531,7 +2530,7 @@ int main()
 				{
 					count_input++;
 				}
-				input.assign(commentNumberChar, count_input);
+				input.assign(count_input, commentNumberChar);
 				commentNumber2 = input;
 				count_input = 0;
 			}
@@ -2556,7 +2555,7 @@ int main()
 			{
 				count_input++;
 			}
-			name3.assign(name, count_input);
+			name3.assign(count_input, name);
 
 			std::cout << ("enter title (commenting): ");
 			std::cin.clear();
@@ -2567,7 +2566,7 @@ int main()
 			{
 				count_input++;
 			}
-			title3.assign(title, count_input);
+			title3.assign(count_input, title);
 
 			std::cout << ("enter comment (commenting): ");
 			std::cin.clear();
@@ -2578,7 +2577,7 @@ int main()
 			{
 				count_input++;
 			}
-			post3.assign(post_string, count_input);
+			post3.assign(count_input, post_string);
 
 			count_input = 0;
 
@@ -2596,7 +2595,7 @@ int main()
 				try
 				{
 					string indexSubstr;
-					indexSubstr.assign('a', 3);
+					indexSubstr.assign(3, 'a');
 					indexSubstr.clear();
 					indexSubstr.resize(3);
 					indexSubstr.append(tempFileLines3[x].substr(0, 2));
@@ -2739,7 +2738,7 @@ int main()
 
 					int array_index = 0;
 					string indexstring;
-					indexstring.assign('a', 4);
+					indexstring.assign(4, 'a');
 					indexstring.clear();
 					indexstring.resize(4);
 
@@ -2801,7 +2800,7 @@ int main()
 				{
 					int commentPositionToInsert = 0;
 					string indexstring;
-					indexstring.assign('a', 3);
+					indexstring.assign(3, 'a');
 					indexstring.clear();
 					indexstring.resize(3);
 
@@ -2811,7 +2810,7 @@ int main()
 						try
 						{
 							string indexSubstr;
-							indexSubstr.assign('a', 3);
+							indexSubstr.assign(3, 'a');
 							indexSubstr.clear();
 							indexSubstr.resize(3);
 							indexSubstr += (tempFileLines3[x].substr(0, 2));
@@ -2980,7 +2979,7 @@ int main()
 				{
 					count_input++;
 				}
-				input.assign(input2, count_input);
+				input.assign(count_input, input2);
 			}
 		}
 		else if (strcmp(input.c_str(), "list") == 0)
@@ -3036,7 +3035,7 @@ int main()
 				input.at(x) = input2[x];
 				count_input++;
 			}
-			input.assign(input2, count_input);
+			input.assign(count_input, input2);
 		}
 		else if (strcmp(input.c_str(), "get") == 0)
 		{
@@ -3053,7 +3052,7 @@ int main()
 			{
 				count_input++;
 			}
-			postNum2.assign(postNumChar, count_input);
+			postNum2.assign(count_input, postNumChar);
 
 			if (!isNumber(postNum2))
 			{
@@ -3075,7 +3074,7 @@ int main()
 					input.at(x) = input2[x];
 					count_input++;
 				}
-				input.assign(input2, count_input);
+				input.assign(count_input, input2);
 			}
 			else
 			{
@@ -3124,7 +3123,7 @@ int main()
 					input.at(x) = input2[x];
 					count_input++;
 				}
-				input.assign(input2, count_input);
+				input.assign(count_input, input2);
 			}
 		}
 		else if (strcmp(input.c_str(), "?") == 0)
@@ -3154,7 +3153,7 @@ int main()
 				input.at(x) = input2[x];
 				count_input++;
 			}
-			input.assign(input2, count_input);
+			input.assign(count_input, input2);
 		}
 		else if (strcmp(input.c_str(), "0") == 0)
 		{
@@ -3197,12 +3196,12 @@ int main()
 				postNum2.assign(50, 'a');
 				postNum.clear();
 				postNum.resize(50);
-				postNum2.assign(postNumChar, count_input);
+				postNum2.assign(count_input, postNumChar);
 				
 				input.assign(500, 'a');
 				input.clear();
 				input.resize(500);
-				input.assign(postNum2);
+				input.append(postNum2);
 
 				if (!isNumber(input) && strcmp(input.c_str(), "finish") != 0 && master_post == false)
 				{
@@ -3223,7 +3222,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.assign("read");
+					input.append("read");
 				}
 				else
 				{
@@ -3275,7 +3274,7 @@ int main()
 						input.assign(500, 'a');
 						input.clear();
 						input.resize(500);
-						input.assign("read");
+						input.append("read");
 					}
 				}
 			}
@@ -3290,14 +3289,14 @@ int main()
 				{
 					count_input++;
 				}
-				postNum2.assign(postNumChar, count_input);
+				postNum2.assign(count_input, postNumChar);
 				
 				//input.clear();
 
 				input.assign(500, 'a');
 				input.clear();
 				input.resize(500);
-				input.assign(postNum2);
+				input.append(postNum2);
 
 				if (!isNumber(input) && strcmp(input.c_str(), "finish") != 0)
 				{
@@ -3330,7 +3329,7 @@ int main()
 						input.assign(500, 'a');
 						input.clear();
 						input.resize(500);
-						input.assign("read");
+						input.append("read");
 					}
 					else
 					{
@@ -3344,7 +3343,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.assign("read");
+							input.append("read");
 						}
 						catch (const std::out_of_range& e) {
 							std::cerr << "Out of range: " << e.what() << std::endl;
@@ -3352,7 +3351,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.assign("read");
+							input.append("read");
 						}
 						
 						if (master_postNum == 0)
@@ -3400,7 +3399,7 @@ int main()
 							count_input++;
 						}
 
-						input.assign(input2, count_input);
+						input.assign(count_input, input2);
 
 						baseIndex = 0;
 
@@ -3410,21 +3409,21 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.assign("0");
+							input.append("0");
 						}
 						else if (strcmp(input.c_str(), "finish") != 0 && strcmp(input.c_str(), "n") != 0)
 						{
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.assign("read");
+							input.apppend("read");
 						}
 						else if (strcmp(input.c_str(), "n") == 0)
 						{
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.assign("n");
+							input.append("n");
 							master_post = false;
 							commentNumber3 = 0;  //set the global variable for posting (default)
 						}
@@ -3436,7 +3435,7 @@ int main()
 								input.assign(500, 'a');
 								input.clear();
 								input.resize(500);
-								input.assign("read");
+								input.append("read");
 							}
 							else
 							{
@@ -3465,7 +3464,7 @@ int main()
 								input.assign(500, 'a');
 								input.clear();
 								input.resize(500);
-								input.assign("read");
+								input.append("read");
 							}
 						}
 						else if (strcmp(input.c_str(), "finish") == 0)
@@ -3479,7 +3478,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.assign("read");
+							input.append("read");
 							master_postNum = 0;
 							master_post == false;
 						}
@@ -3502,7 +3501,7 @@ int main()
 					{
 						count_input++;
 					}
-					input.assign(input2, count_input);
+					input.assign(count_input, input2);
 				}
 				else
 				{
@@ -3510,7 +3509,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.assign("read");
+					input.append("read");
 				}
 			}
 		}
@@ -3533,12 +3532,12 @@ int main()
 			{
 				count_input++;
 			}
-			input.assign(input2, count_input);
+			input.assign(count_input, input2);
 		}
 		else if (strcmp(input.c_str(), "old") == 0)
 		{
 			string oldFileNum;
-			oldFileNum.assign('a', 4);
+			oldFileNum.assign(4, 'a');
 			oldFileNum.clear();
 			oldFileNum.resize(4);
 			int y = 0;
@@ -3570,8 +3569,7 @@ int main()
 				{
 					count_input++;
 				}
-				postNum2.assign(postNumChar, count_input);
-
+				postNum2.assign(count_input, postNumChar);
 			}
 
 			if (!isNumber(postNum2))
@@ -3586,7 +3584,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.assign("finish");
+					input.append("finish");
 					master_post == true;
 				}
 			}
@@ -3597,7 +3595,7 @@ int main()
 					current_filename.assign(50, 'a');
 					current_filename.clear();
 					current_filename.resize(50);
-					current_filename.assign(fileOldNames[stoi(postNum2)]);
+					current_filename.append(fileOldNames[stoi(postNum2)]);
 				}
 				catch (exception e)
 				{
@@ -3606,7 +3604,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					input.assign("exit");
+					input.append("exit");
 				}
 			}
 
@@ -3639,7 +3637,7 @@ int main()
 			{
 				count_input++;
 			}
-			input.assign(input2, count_input);
+			input.assign(count_input, input2);
 		}
 		else if (strcmp(input.c_str(), "exit") == 0)
 		{
@@ -3668,7 +3666,7 @@ int main()
 			{
 				count_input++;
 			}
-			input.assign(input2, count_input);
+			input.assign(count_input, input2);
 		}
 	}
 }
