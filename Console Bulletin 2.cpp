@@ -843,7 +843,7 @@ string getFile2()
 	{
 		NUMBER = "0  ";
 	}
-	
+
 	for (int x = 0; x < 257; x++)
 	{
 		tempFileLines3[x].assign(400000, 'a');
@@ -861,12 +861,12 @@ string getFile2()
 		wofstream outfile;
 		outfile.imbue(std::locale("en_US.UTF-8"));
 		outfile.open(current_filename, ios::out);
-		
+
 		for (int x = 0; x < 257; x++)
 		{
 			outfile << "\r\n";
 		}
-		
+
 		outfile.close();
 
 		wofstream outfile41("BulletinData.txt", ios::out);
@@ -887,77 +887,48 @@ string getFile2()
 		return "";
 	}
 
-	std::size_t atCount = 0;
-	infile.open(current_filename, std::ios::in);
-
-	int stringLength;
-	int firstDelim = 0;
-	int secondDelim = 0;
-	string tempSTRING;
-	string tempSTRING2;
-	tempSTRING.assign(400000, 'a');
-	tempSTRING.clear();
-	tempSTRING2.assign(200000, 'a');
-	tempSTRING2.clear();
-	int atCount2 = 0;
-	
-	getline(infile, STRING); //get a single line file format and work with delimeter ";@"
-	
-	for (int x = 0; x < 257; x++)// To get you all the lines.
-	{
-		atCount = STRING.find(";@");
-		atCount += 2; //account for delimiter
-
-		tempSTRING.assign(200000, 'a');
-		tempSTRING.clear();
-
-		secondDelim = tempSTRING2.find(";@", firstDelim);
-		secondDelim += 2;
-		tempSTRING.append(tempSTRING2.substr(atCount2, secondDelim));
-		firstDelim = secondDelim + 2;  // skip the delemeter
-		atCount2 = firstDelim;
-
-		if (x != 0)
-		{
-			atCount2--;
-		}
-		else
-		{
-			atCount2 = 0;
-		}
-
-		if (atCount2 == std::string::npos)
-		{
-			//numberOfPosts = x + 1;
-			//cout << "end counting file";
-			return "";
-		}
-		else if(atCount != std::string::npos && atCount < 400000)
-		{
-			tempFileLines3[x].assign(tempSTRING.c_str());
-			
-			stringLength = tempSTRING.find(";@");  // the return char is I think -@-
-			stringLength += 2;
-
-			for (int x = 0; x < stringLength; x++)
-			{
-				temp244[fileCount] += tempSTRING[x];
-				fileCount++;
-			}
-			numberOfPosts++;
-		}
-		else
-		{
-			tempFileLines3[x] = "\r\n\n";
-		}
-
-		tempSTRING.assign(400000, 'a');
-		tempSTRING.clear();
-		tempSTRING.resize(400000);
+	fileCount = 0;
+	std::ifstream infile3(current_filename, std::ios::in);
+	if (!infile3.is_open()) {
+		return "";
 	}
-	infile.close();
+	std::string all;
+	all.assign((std::istreambuf_iterator<char>(infile3)),
+		std::istreambuf_iterator<char>());
+	infile3.close();
 
-	STRING.clear();
+	size_t start = 0;
+	size_t pos = 0;
+	int index = 0;
+
+	while (index < 257) {
+		pos = all.find(";@", start);
+		if (pos == std::string::npos) {
+			break;  // デリミタがもう無い
+		}
+
+		pos += 2;  // デリミタを含める
+
+		// 1ブロックを取り出す
+
+		if (index != 0)
+		{
+			tempFileLines3[index] = all.substr(start + 1, pos - start);
+		}
+		else
+		{
+			tempFileLines3[index] = all.substr(start, pos - start) + '\r';
+		}
+
+		// temp244 にもコピー
+		for (size_t i = start; i < pos; i++) {
+			temp244[fileCount++] = all[i];
+		}
+
+		start = pos;
+		index++;
+		numberOfPosts++;
+	}
 
 	int tempNum = stoi(NUMBER.c_str());
 	numPosts = tempNum;
@@ -968,7 +939,7 @@ string getFile2()
 		cout << "\r\n";
 	}
 
-
+	//STRING.clear();
 
 	for (int x = 0; x < 400000; x++)
 	{
@@ -1011,25 +982,25 @@ string getFile2()
 			break;
 		}
 	}
-/*
-	if (isWhitespaceOnly) {
-		// The string contains only whitespace characters
-	}
-	else if (fileItSelf2.length() < 20)
-	{
-		//initialize file for start using
-		wofstream outfile;
-		outfile.imbue(std::locale("en_US.UTF-8"));
-		outfile.open(current_filename, ios::out);
-
-		for (int x = 0; x < 257; x++)
-		{
-			outfile << '\n';
+	/*
+		if (isWhitespaceOnly) {
+			// The string contains only whitespace characters
 		}
+		else if (fileItSelf2.length() < 20)
+		{
+			//initialize file for start using
+			wofstream outfile;
+			outfile.imbue(std::locale("en_US.UTF-8"));
+			outfile.open(current_filename, ios::out);
 
-		outfile.close();
-	}
-*/
+			for (int x = 0; x < 257; x++)
+			{
+				outfile << '\n';
+			}
+
+			outfile.close();
+		}
+	*/
 	encryptedFileName.assign(50, 'a');
 	encryptedFileName.clear();
 	encryptedFileName.resize(50);
@@ -1081,7 +1052,7 @@ string getFile2()
 	infile33.close();
 
 	STRING.clear();
-	
+
 	return fileItSelf2;
 }
 
@@ -1329,7 +1300,7 @@ string listPost()
 		second5 = 0;
 		second6 = 0;
 		*/
-		
+
 		std::size_t temp2 = tempFileLines3[counter].find(":@", 0);
 		second = temp2;
 		std::size_t temp12 = tempFileLines3[counter].find(":@", second + 2);
@@ -1466,13 +1437,15 @@ string _GetComments(int headingNumber2)
 	//extract the post line from whole file
 	for (int x = 0; x < headingNumber2 && numPosts - headingNum - x != 0; x++)
 	{
-		findPost = fileComment2.find(":@;@");
-		fileComment2 = fileComment2.substr(findPost + 4, fileComment2.length() - findPost + 4);
 
 		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
 		{
 			break;
 		}
+
+		findPost = fileComment2.find(":@;@");
+		fileComment2 = fileComment2.substr(0, findPost + 4);
+
 	}
 
 	findPost = fileComment.find(":@;@");
@@ -1487,12 +1460,12 @@ string _GetComments(int headingNumber2)
 			_comment = "COMMENT_NOT_FOUND";
 			break;
 		}
-		
+
 		lastIndex_global = index_global;
-		
+
 		try
 		{
-			indexstring.append(fileComment.substr(index_global, 3).c_str());
+			indexstring.append(fileComment2.substr(index_global, 3).c_str());
 			indexstring.shrink_to_fit();
 			globalcounter = stoi(indexstring.c_str());
 			//indexstring.clear();
@@ -1513,15 +1486,15 @@ string _GetComments(int headingNumber2)
 
 		counter++;
 
-		tempindex_found = fileComment.find(";@", tempindex_found2); // this is set to be wrong value -- start debugging here
+		tempindex_found = fileComment2.find(";@", tempindex_found2); // this is set to be wrong value -- start debugging here
 	} while (tempindex_found - lastIndex_global > 26 && counter < 6 && strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") != 0);
-	
-	counter = 0;
 
-	if (_comment == "COMMENT_NOT_FOUND")
+	if (_comment == "COMMENT_NOT_FOUND" || counter == 5)
 	{
 		return "COMMENT_NOT_FOUND";
 	}
+
+	counter = 0;
 
 	std::size_t index19 = fileComment.find(":@", 2);
 	index_global = index19;
@@ -1531,7 +1504,7 @@ string _GetComments(int headingNumber2)
 	index_global = length21;
 	std::size_t length22 = fileComment.find(":@", index_global + 2);
 	index_global = length22;
-	
+
 	comments3.append(fileComment.substr(index_global + 2, fileComment.length() - index_global));
 
 	int index2 = 0;  //reset index6
@@ -1539,7 +1512,7 @@ string _GetComments(int headingNumber2)
 	int index3 = 0;
 	//skip main post field
 	lastIndex5 = index2;
-	
+
 	string post0;
 	post0.assign(50000, 'a');
 	post0.clear();
@@ -1562,7 +1535,7 @@ string _GetComments(int headingNumber2)
 	}
 
 	number = stoi(comments3.substr(0, 3).c_str());
-	
+
 	int noCommentNum = index_global - length21;
 
 	if (noCommentNum <= 22 || globalcounter < 1)  //there should be only timestamp when last delimiter other than a comment and a timestamp
@@ -1574,7 +1547,7 @@ string _GetComments(int headingNumber2)
 		return _comment;
 	}
 
-	post0.append(comments3.substr(0 , comments3.length() - 2));
+	post0.append(comments3.substr(0, comments3.length() - 2));
 	post0.shrink_to_fit();
 
 	int index5 = 0;
@@ -1729,7 +1702,7 @@ int main()
 	char name[50];
 	char title[50];
 	char post_string[2000];
-	
+
 	char commentNumberChar[50];
 	char input2[5000];
 
@@ -2027,7 +2000,7 @@ int main()
 	for (int x = 0; list2[x] != '\0'; x++) {
 		count_input++; // This variable can be used if you need the count later on.
 	}
-	input.assign(count_input, list2);
+	input = list2;
 	std::string::size_type pos = 0u;
 	while ((pos = input.find(":@", pos)) != std::string::npos) {
 		name3.replace(pos, 2, " ");
@@ -2103,22 +2076,22 @@ int main()
 				name3 += name[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
-			name3.assign(count_input, name);
+			name3 = name;
 
 			count_input = 0;
 			for (int x = 0; title[x] != '\0'; x++) {
 				title3 += title[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
-			title3.assign(count_input, title);
+			title3 = title;
 
 			count_input = 0;
 			for (int x = 0; post_string[x] != '\0'; x++) {
 				post3 += post_string[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
-			post3.assign(count_input, post_string);
-			
+			post3 = post_string;
+
 			//find all delimiters and replace
 			myReplace(title3, ":@", " ");
 			myReplace(title3, ";@", " ");
@@ -2185,7 +2158,7 @@ int main()
 				}
 
 				//remember the old post file name
-				std:ofstream outfile14(encryptedFileName);
+			std:ofstream outfile14(encryptedFileName);
 				outfile14 << time_str27 + current_filename;  //always should be "BulletinLog.txt"  Somehow disable editing of log files?
 				outfile14 << "\r\n";
 				outfile14.close();
@@ -2464,7 +2437,7 @@ int main()
 			{
 				count_input++;
 			}
-			postNum2.assign(count_input, postNumChar);
+			postNum2 = postNumChar;
 
 			count_input = 0;
 
@@ -2510,7 +2483,7 @@ int main()
 			{
 				count_input++;
 			}
-			commentNumber2.assign(count_input, commentNumberChar);
+			commentNumber2 = commentNumberChar;
 
 			count_input = 0;
 
@@ -2530,7 +2503,7 @@ int main()
 				{
 					count_input++;
 				}
-				input.assign(count_input, commentNumberChar);
+				input = commentNumberChar;
 				commentNumber2 = input;
 				count_input = 0;
 			}
@@ -2555,7 +2528,7 @@ int main()
 			{
 				count_input++;
 			}
-			name3.assign(count_input, name);
+			name3 = name;
 
 			std::cout << ("enter title (commenting): ");
 			std::cin.clear();
@@ -2566,7 +2539,7 @@ int main()
 			{
 				count_input++;
 			}
-			title3.assign(count_input, title);
+			title3 = title;
 
 			std::cout << ("enter comment (commenting): ");
 			std::cin.clear();
@@ -2577,7 +2550,7 @@ int main()
 			{
 				count_input++;
 			}
-			post3.assign(count_input, post_string);
+			post3 = post_string;
 
 			count_input = 0;
 
@@ -2979,7 +2952,7 @@ int main()
 				{
 					count_input++;
 				}
-				input.assign(count_input, input2);
+				input = input2;
 			}
 		}
 		else if (strcmp(input.c_str(), "list") == 0)
@@ -2997,9 +2970,9 @@ int main()
 
 			//ListPost();
 			temp = listPost();  //stack overflow??
-			
+
 			FormatDelim* obj = new FormatDelim(":@");
-			
+
 			for (int x = 0; x < 257 && listString[x].size() > 20 && numPosts <= x; x++)
 			{
 				//listString[x].shrink_to_fit();
@@ -3008,7 +2981,7 @@ int main()
 			}
 
 			numberOfPosts = numPosts;  // set in getFile2 function			delete obj;
-			
+
 			//std::cout << strOutData.c_str();
 			//input.clear();
 			input.assign(200, 'a');
@@ -3035,12 +3008,12 @@ int main()
 				input.at(x) = input2[x];
 				count_input++;
 			}
-			input.assign(count_input, input2);
+			input = input2;
 		}
 		else if (strcmp(input.c_str(), "get") == 0)
 		{
 			getFile2();
-			
+
 			std::cout << "enter post number to get for simple reading";
 			std::cout << "\n";
 			std::cin.clear();
@@ -3052,7 +3025,7 @@ int main()
 			{
 				count_input++;
 			}
-			postNum2.assign(count_input, postNumChar);
+			postNum2 = postNumChar;
 
 			if (!isNumber(postNum2))
 			{
@@ -3074,7 +3047,7 @@ int main()
 					input.at(x) = input2[x];
 					count_input++;
 				}
-				input.assign(count_input, input2);
+				input = input2;
 			}
 			else
 			{
@@ -3104,7 +3077,7 @@ int main()
 				}
 
 				temp = _GetPost(_heading);
-				std::cout << temp << "\r\n";		
+				std::cout << temp << "\r\n";
 
 				std::cout << ("enter y to post, n to comment(0 to exit loop):");
 				for (int x = 0; x < 5000, x++;)
@@ -3123,7 +3096,7 @@ int main()
 					input.at(x) = input2[x];
 					count_input++;
 				}
-				input.assign(count_input, input2);
+				input = input2;
 			}
 		}
 		else if (strcmp(input.c_str(), "?") == 0)
@@ -3153,7 +3126,7 @@ int main()
 				input.at(x) = input2[x];
 				count_input++;
 			}
-			input.assign(count_input, input2);
+			input = input2;
 		}
 		else if (strcmp(input.c_str(), "0") == 0)
 		{
@@ -3163,7 +3136,7 @@ int main()
 		{
 			getFile2();
 			listPost();
-			
+
 			numPosts = 0;
 			for (int x = 0; x < 257; x++)
 			{
@@ -3196,8 +3169,8 @@ int main()
 				postNum2.assign(50, 'a');
 				postNum.clear();
 				postNum.resize(50);
-				postNum2.assign(count_input, postNumChar);
-				
+				postNum2 = postNumChar;
+
 				input.assign(500, 'a');
 				input.clear();
 				input.resize(500);
@@ -3233,7 +3206,7 @@ int main()
 					{
 						std::cout << "post number out of range check using 'list' command";
 						std::cout << "\r\n";
-						
+
 						input.assign(500, 'a');
 						input.clear();
 						input.resize(500);
@@ -3284,13 +3257,13 @@ int main()
 				waitForKeyInput();
 
 				master_post = true;
-				
+
 				for (int x = 0; postNumChar[x] != '\0'; x++)
 				{
 					count_input++;
 				}
-				postNum2.assign(count_input, postNumChar);
-				
+				postNum2 = postNumChar;
+
 				//input.clear();
 
 				input.assign(500, 'a');
@@ -3339,7 +3312,7 @@ int main()
 						}
 						catch (const std::invalid_argument& e) {
 							std::cerr << "Invalid argument: " << e.what() << std::endl;
-							
+
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
@@ -3353,7 +3326,7 @@ int main()
 							input.resize(500);
 							input.append("read");
 						}
-						
+
 						if (master_postNum == 0)
 						{
 							master_postNum++;
@@ -3399,7 +3372,7 @@ int main()
 							count_input++;
 						}
 
-						input.assign(count_input, input2);
+						input = input2;
 
 						baseIndex = 0;
 
@@ -3416,7 +3389,7 @@ int main()
 							input.assign(500, 'a');
 							input.clear();
 							input.resize(500);
-							input.apppend("read");
+							input.append("read");
 						}
 						else if (strcmp(input.c_str(), "n") == 0)
 						{
@@ -3445,10 +3418,10 @@ int main()
 
 								std::cout << temp << "\r\n";
 								std::cout << "-----------------------------------------------" << "\r\n";
-								
+
 								listPost();
 								std::cout << listString[numPosts - master_postNum];
-								
+
 								std::cout << "-----------------------------------------------" << "\r\n";
 
 								baseIndex = 0;
@@ -3501,7 +3474,7 @@ int main()
 					{
 						count_input++;
 					}
-					input.assign(count_input, input2);
+					input = input2;
 				}
 				else
 				{
@@ -3532,7 +3505,7 @@ int main()
 			{
 				count_input++;
 			}
-			input.assign(count_input, input2);
+			input = input2;
 		}
 		else if (strcmp(input.c_str(), "old") == 0)
 		{
@@ -3569,7 +3542,7 @@ int main()
 				{
 					count_input++;
 				}
-				postNum2.assign(count_input, postNumChar);
+				postNum2 = postNumChar;
 			}
 
 			if (!isNumber(postNum2))
@@ -3600,7 +3573,7 @@ int main()
 				catch (exception e)
 				{
 					std::cout << "Error reading old post exiting (error in program)";
-					
+
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
@@ -3637,7 +3610,7 @@ int main()
 			{
 				count_input++;
 			}
-			input.assign(count_input, input2);
+			input = input2;
 		}
 		else if (strcmp(input.c_str(), "exit") == 0)
 		{
@@ -3666,7 +3639,7 @@ int main()
 			{
 				count_input++;
 			}
-			input.assign(count_input, input2);
+			input = input2;
 		}
 	}
 }
