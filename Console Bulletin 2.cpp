@@ -1603,7 +1603,6 @@ string _GetComments(int headingNumber2)
 	}
 
 	post0.append(comments3.substr(0, comments3.length() - 2));
-	post0.shrink_to_fit();
 
 	int index5 = 0;
 	int index9 = 0;
