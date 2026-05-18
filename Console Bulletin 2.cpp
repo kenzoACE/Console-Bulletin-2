@@ -1503,8 +1503,9 @@ string _GetComments(int headingNumber2)
 
 	}
 
-	findPost = fileComment.find(":@;@");
-	fileComment2 = fileComment.substr(0, findPost + 4);
+	// go to the main post with comments and start extracting comments to the comments array
+	findPost = fileComment2.find(":@;@");
+	fileComment2 = fileComment2.substr(0, findPost + 4);
 
 	counter = 0;
 
