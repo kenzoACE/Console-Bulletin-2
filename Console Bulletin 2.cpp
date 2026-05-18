@@ -1804,7 +1804,7 @@ int main()
 	}
 
 	/*
-	file.assign(500000, 'a');
+	n(500000, 'a');
 	file.clear();
 	file.resize(500000);
 	file = getFile2();
@@ -2214,7 +2214,7 @@ int main()
 				}
 
 				//remember the old post file name
-			std:ofstream outfile14(encryptedFileName);
+				std:ofstream outfile14(encryptedFileName);
 				outfile14 << time_str27 + current_filename;  //always should be "BulletinLog.txt"  Somehow disable editing of log files?
 				outfile14 << "\r\n";
 				outfile14.close();
@@ -2280,15 +2280,15 @@ int main()
 				outFile55.close();
 
 				//reread from file for other purposes
-				file.assign(500000, 'a');
-				file.clear();
-				file.resize(500000);
-				file.append(getFile2());
-				file.shrink_to_fit();
-				for (int x = 0; x < file.length(); x++)
-				{
-					temp244[x] = file.at(x);
-				}
+//				n(500000, 'a');
+//				file.clear();
+//				file.resize(500000);
+//				file.append(getFile2());
+//				file.shrink_to_fit();
+//				for (int x = 0; x < file.length(); x++)
+//				{
+//					temp244[x] = file.at(x);
+//				}
 
 				//finally set the number of post to 128
 				numberOfPosts = 128;
