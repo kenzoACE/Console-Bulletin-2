@@ -1503,7 +1503,6 @@ string _GetComments(int headingNumber2)
 
 	}
 
-	// go to the main post with comments and start extracting comments to the comments array
 	findPost = fileComment2.find(":@;@");
 	fileComment2 = fileComment2.substr(0, findPost + 4);
 
@@ -1805,7 +1804,7 @@ int main()
 	}
 
 	/*
-	n(500000, 'a');
+	file.assign(500000, 'a');
 	file.clear();
 	file.resize(500000);
 	file = getFile2();
@@ -2281,7 +2280,7 @@ int main()
 				outFile55.close();
 
 				//reread from file for other purposes
-//				n(500000, 'a');
+//				file.assign(500000, 'a');
 //				file.clear();
 //				file.resize(500000);
 //				file.append(getFile2());
@@ -2545,7 +2544,7 @@ int main()
 			count_input = 0;
 
 			temp = _GetComments(_heading);
-			if (!isNumber(commentNumber2) || strcmp(temp.c_str(), "COMMENT_NOT_FOUND") == 0)
+			if ((!isNumber(commentNumber2) || strcmp(temp.c_str(), "COMMENT_NOT_FOUND") == 0) && strcmp(commentNumber2.c_str(), "0") != 0)
 			{
 				std::cout << ("invalid comment number, please enter an another comment number: ");
 
@@ -2568,7 +2567,7 @@ int main()
 			std::cout << std::boolalpha;													  // Print bools as true/false
 			std::cout << "Is the string a number: " << isNumber(commentNumber2) << std::endl; // Should output true
 
-			if (!isNumber(commentNumber2) || temp == "COMMENT_NOT_FOUND")
+			if ((!isNumber(commentNumber2) || temp == "COMMENT_NOT_FOUND") && strcmp(commentNumber2.c_str(), "0") != 0)
 			{
 				std::cout << "invalid comment number again, exiting program"; // this should not be hit
 				std::cout << "\n";
@@ -2846,10 +2845,14 @@ int main()
 							indexSubstr += (tempFileLines3[x].substr(0, 2));
 							int currentNumber = std::stoi(indexSubstr);
 
-							if (std::stoi(postNum2) == currentNumber)
+							if (std::stoi(postNum2) == currentNumber && std::stoi(postNum2) != 0)
 							{
 								array_index = x;
 								break;
+							}
+							else
+							{
+								array_index = -1;
 							}
 						}
 						catch (const std::exception& e)
@@ -2859,7 +2862,7 @@ int main()
 					}
 
 					array_index++;
-					
+
 					int index_2 = 0;
 
 					// new node
