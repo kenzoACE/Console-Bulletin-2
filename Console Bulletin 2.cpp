@@ -2850,14 +2850,15 @@ int main()
 								array_index = x;
 								break;
 							}
-							else
+							else if(std::stoi(postNum2) == 0)
 							{
 								array_index = -1;
+								break;
 							}
 						}
 						catch (const std::exception& e)
 						{
-							// std::cout << "Error counting array: " << e.what() << std::endl;
+							std::cout << "Error counting array: " << e.what() << std::endl;
 						}
 					}
 
