@@ -1490,9 +1490,8 @@ string _GetComments(int headingNumber2)
 	int findPost = 0;
 
 	//extract the post line from whole file
-	for (int x = 0; x < headingNumber2 && numPosts - headingNum - x != 0; x++)
+	for (int x = 0; x < numPosts; x++)
 	{
-
 		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
 		{
 			break;
@@ -1500,7 +1499,6 @@ string _GetComments(int headingNumber2)
 
 		findPost = fileComment2.find(":@;@");
 		fileComment2 = fileComment2.substr(0, findPost + 4);
-
 	}
 
 	findPost = fileComment2.find(":@;@");
