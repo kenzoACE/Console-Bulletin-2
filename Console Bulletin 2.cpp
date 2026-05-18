@@ -2698,14 +2698,14 @@ int main()
 					outfile5.close();
 
 					// reread from file for other purposes
-					file.clear();
-					file.resize(500000);
-					file.append(getFile2());
-					file.shrink_to_fit();
-					for (int x = 0; x < file.length(); x++)
-					{
-						temp244[x] = file.at(x);
-					}
+//					file.clear();
+//					file.resize(500000);
+//					file.append(getFile2());
+//					file.shrink_to_fit();
+//					for (int x = 0; x < file.length(); x++)
+//					{
+//						temp244[x] = file.at(x);
+//					}
 
 					postNum.assign(3, 'a');
 					postNum.clear();
@@ -2857,6 +2857,8 @@ int main()
 						}
 					}
 
+					array_index++;
+					
 					int index_2 = 0;
 
 					// new node
