@@ -1497,15 +1497,17 @@ string _GetComments(int headingNumber2)
 			break;
 		}
 
-		findPost = fileComment2.find(":@;@");
-		fileComment2 = fileComment2.substr(0, findPost + 4);
+		findPost = fileComment2.size();
+		fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 5, findPost - fileComment2.find(":@;@") - 4);  //skip the post
 	}
 
+	//get rid of trailing posts
 	findPost = fileComment2.find(":@;@");
 	fileComment2 = fileComment2.substr(0, findPost + 4);
 
 	counter = 0;
 
+	// see if there are any comments
 	do
 	{
 		if (tempindex - lastIndex_global < 22 && counter == 5)
@@ -1558,7 +1560,7 @@ string _GetComments(int headingNumber2)
 	std::size_t length22 = fileComment.find(":@", index_global + 2);
 	index_global = length22;
 
-	comments3.append(fileComment.substr(index_global + 2, fileComment.length() - index_global));
+	comments3.append(fileComment2);
 
 	int index2 = 0;  //reset index6
 	int lastIndex5;
@@ -1601,6 +1603,7 @@ string _GetComments(int headingNumber2)
 	}
 
 	post0.append(comments3.substr(0, comments3.length() - 2));
+	//post0.shrink_to_fit();
 
 	int index5 = 0;
 	int index9 = 0;
