@@ -46,7 +46,7 @@ bool master_post = false;
 int master_postNum = 0;
 int master_commentNum = 0;
 int num50 = 0;
-int index = 0;
+int _index = 0;
 int main();
 //static string GetComments(int, string);
 //string GetHeading(int);
@@ -984,7 +984,8 @@ string getFile2()
 		numberOfPosts++;
 	}
 
-	int tempNum = stoi(NUMBER.c_str());
+	int tempNum = 0;
+	tempNum = stoi(NUMBER.c_str());
 	numPosts = tempNum;
 
 	if (numberOfPosts != tempNum)
