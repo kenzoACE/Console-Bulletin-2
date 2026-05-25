@@ -1271,7 +1271,7 @@ string listPost()
 	int second6 = 0;
 	*/
 	string tempString;
-	tempString.assign(5000, 'a');
+	tempString.assign(50000, 'a');
 	tempString.clear();
 	//tempString.resize(5000);
 
@@ -1288,17 +1288,17 @@ string listPost()
 		return "";
 	}
 
-	string fileList;
-	fileList.assign(500000, 'a');
-	fileList.clear();
-	fileList.resize(500000);
+	//string fileList;
+	//fileList.assign(500000, 'a');
+	//fileList.clear();
+	//fileList.resize(500000);
 
 	numPosts = 0;
 
 	//count the number of posts
 	for (int x = 0; x < 257; x++)
 	{
-		listString[x].assign(4000, 'a');
+		listString[x].assign(40000, 'a');
 		listString[x].clear();
 		//listString[x].resize(4000);
 
@@ -1313,7 +1313,7 @@ string listPost()
 		}
 	}
 
-	fileList.assign(getFile2());
+	//fileList.assign(getFile2());
 	//fileList.shrink_to_fit();
 
 	index_global = 0;
@@ -3024,9 +3024,9 @@ int main()
 			std::cin.clear();
 			for (int x = 0; x <= 256; x++)
 			{
-				listString[x].assign(2000, 'a');
+				listString[x].assign(20000, 'a');
 				listString[x].clear();
-				listString[x].resize(2000);
+				listString[x].resize(20000);
 			}
 
 			//reread from file for other purposes
