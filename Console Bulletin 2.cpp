@@ -3037,7 +3037,7 @@ int main()
 
 			FormatDelim* obj = new FormatDelim(":@");
 
-			for (int x = 0; x < 257 && listString[x].size() > 20 && numPosts <= x; x++)
+			for (int x = 0; x < 257 && listString[x].size() > 22; x++)
 			{
 				//listString[x].shrink_to_fit();
 				std::cout << (obj->set(listString[x].c_str()));
