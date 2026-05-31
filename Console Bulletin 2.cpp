@@ -3238,7 +3238,7 @@ int main()
 				input.assign(500, 'a');
 				input.clear();
 				input.resize(500);
-				input.append(postNum2);
+				input.assign(postNum2);
 
 				if (!isNumber(input) && strcmp(input.c_str(), "finish") != 0 && master_post == false)
 				{
