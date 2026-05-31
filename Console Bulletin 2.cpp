@@ -1495,6 +1495,15 @@ string _GetComments(int headingNumber2)
 	{
 		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
 		{
+			findPost = fileComment2.size();
+			try
+			{
+				fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 5, findPost - fileComment2.find(":@;@") - 4);  //skip the post
+			}
+			catch (exception e)
+			{
+			}
+
 			break;
 		}
 
@@ -1522,29 +1531,29 @@ string _GetComments(int headingNumber2)
 		try
 		{
 			indexstring.append(fileComment2.substr(index_global, 3).c_str());
-			indexstring.shrink_to_fit();
 			globalcounter = stoi(indexstring.c_str());
-			//indexstring.clear();
+			indexstring.assign(7, 'a');
+			indexstring.clear();
 		}
 		catch (exception e)
 		{
-			// do nothing
+			break;
 		}
 
 		if (counter <= 5)
 		{
 			tempindex_found2 = index_global;
 		}
-		std::size_t tempIndex = fileComment.find(":@", index_global); //this is correct
+		std::size_t tempIndex = fileComment.find(":@", index_global);
 		tempindex = tempIndex + 2;
 
 		index_global = tempindex;
 
 		counter++;
 
-		tempindex_found = fileComment2.find(";@", tempindex_found2); // this is set to be wrong value -- start debugging here
-	} while (tempindex_found - lastIndex_global > 26 && counter < 6 && strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") != 0);
-
+		tempindex_found = fileComment2.find(";@", tempindex_found2);
+	} while (tempindex_found - lastIndex_global > 22 && counter < 7 && strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") != 0);
+	
 	if (_comment == "COMMENT_NOT_FOUND" || counter == 5)
 	{
 		return "COMMENT_NOT_FOUND";
