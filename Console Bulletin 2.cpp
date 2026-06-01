@@ -1498,7 +1498,7 @@ string _GetComments(int headingNumber2)
 			findPost = fileComment2.size();
 			try
 			{
-				fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 5, findPost - fileComment2.find(":@;@") - 4);  //skip the post
+				fileComment2 = fileComment2.substr(0, findPost - fileComment2.find(":@;@") - 4);  //skip the post
 			}
 			catch (exception e)
 			{
