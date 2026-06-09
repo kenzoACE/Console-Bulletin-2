@@ -46,7 +46,7 @@ bool master_post = false;
 int master_postNum = 0;
 int master_commentNum = 0;
 int num50 = 0;
-int _index = 0;
+int index = 0;
 int main();
 //static string GetComments(int, string);
 //string GetHeading(int);
@@ -82,7 +82,7 @@ int _headingNumber = 0;
 //int outputFinalHtml(int);
 int exists[INT16_MAX];
 int exisits_index = 0;
-char temp244[500000];
+char temp244[500000] = { 0 };
 int numPosts;
 int temp16 = 0;
 string number = "   ";
@@ -236,7 +236,7 @@ void NewItemExpanded(int, int, int)
 
 	int numberOfComments = 0;
 	string header2 = "";
-	header2.assign('a', 4000);
+	header2.assign(4000, 'a');
 	header2.clear();
 	header2.resize(4000);
 
@@ -837,7 +837,7 @@ string getFile2()
 		STRING.resize(400);
 	}
 	infile33.close();
-	
+
 	//initialize temp244
 	for (int x = 0; x < 500000; x++)
 	{
@@ -984,8 +984,7 @@ string getFile2()
 		numberOfPosts++;
 	}
 
-	int tempNum = 0;
-	tempNum = stoi(NUMBER.c_str());
+	int tempNum = stoi(NUMBER.c_str());
 	numPosts = tempNum;
 
 	if (numberOfPosts != tempNum)
@@ -1026,7 +1025,7 @@ string getFile2()
 		{
 			currentPos = tempFileLines4[0].find('/n', currentPos);
 			tempFileLines3[x] += (tempFileLines4[x].substr(startPos, currentPos));
-			startPos = currentPos;
+			startPos = currentPos + 1;
 		}
 	}
 
@@ -1084,7 +1083,7 @@ string getFile2()
 
 	//infile43.getloc();
 	STRING.clear();
-	
+
 	for (int x = 0; x < 10000 && infile33.peek() != EOF; x++)// To get you all the lines.
 	{
 		getline(infile33, STRING);
@@ -1158,12 +1157,12 @@ string _GetPost(int headingNum)
 	getFile2();
 
 	//check for unwanted calls
-	if (temp244[0] == '\0' || headingNum == 0)
+	if (temp244[0] == '/0' || headingNum == 0)
 	{
 		return "POST_NOT_FOUND";
 	}
 
-	for (int x = 0; x < 500000 && temp244[x] != '\0'; x++)
+	for (int x = 0; x < 500000 && temp244[x] != '/0'; x++)
 	{
 		filePost.assign(x, temp244[x]);
 	}
@@ -1271,7 +1270,7 @@ string listPost()
 	int second6 = 0;
 	*/
 	string tempString;
-	tempString.assign(50000, 'a');
+	tempString.assign(5000, 'a');
 	tempString.clear();
 	//tempString.resize(5000);
 
@@ -1298,7 +1297,7 @@ string listPost()
 	//count the number of posts
 	for (int x = 0; x < 257; x++)
 	{
-		listString[x].assign(40000, 'a');
+		listString[x].assign(4000, 'a');
 		listString[x].clear();
 		//listString[x].resize(4000);
 
@@ -1476,9 +1475,9 @@ string _GetComments(int headingNumber2)
 
 	int tempindex_found;
 	int tempindex_found2;
-	string indexstring = "       ";
+	string indexstring = "      ";
 	indexstring.clear();
-	indexstring.resize(8);
+	indexstring.resize(7);
 
 	//check for unwanted calls
 	if (headingNumber2 <= 0 || headingNumber2 >= 256 || numPosts < headingNumber2 || temp244[0] == '/n')
@@ -1490,7 +1489,7 @@ string _GetComments(int headingNumber2)
 
 	int findPost = 0;
 
-	//extract the post line from whole file
+	//extract the post line from whole file -- start debugging here
 	for (int x = 0; x < numPosts; x++)
 	{
 		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
@@ -1498,7 +1497,7 @@ string _GetComments(int headingNumber2)
 			findPost = fileComment2.size();
 			try
 			{
-				fileComment2 = fileComment2.substr(0, findPost - fileComment2.find(":@;@") - 4);  //skip the post
+				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") - 4);  //skip the post -- currently does not skip post
 			}
 			catch (exception e)
 			{
@@ -1553,7 +1552,7 @@ string _GetComments(int headingNumber2)
 
 		tempindex_found = fileComment2.find(";@", tempindex_found2);
 	} while (tempindex_found - lastIndex_global > 22 && counter < 7 && strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") != 0);
-	
+
 	if (_comment == "COMMENT_NOT_FOUND" || counter == 5)
 	{
 		return "COMMENT_NOT_FOUND";
@@ -1613,7 +1612,6 @@ string _GetComments(int headingNumber2)
 	}
 
 	post0.append(comments3.substr(0, comments3.length() - 2));
-	//post0.shrink_to_fit();
 
 	int index5 = 0;
 	int index9 = 0;
@@ -1781,6 +1779,8 @@ int main()
 	int _headingNum2 = 0;
 	int _postNum = 0;
 
+	std::cout << "Starting Console.  Please wait...." << "\r\n";
+
 	getFile2();
 
 	// count the number of posts
@@ -1855,7 +1855,7 @@ int main()
 	number26.resize(3);
 	number26 += num[0];
 
-	if (num[0] == '\0')
+	if (num[0] == '/0')
 	{
 		number = "0";
 	}
@@ -1863,11 +1863,11 @@ int main()
 	{
 		number26 += num[0];
 	}
-	if (num[1] != '\0')
+	if (num[1] != '/0')
 	{
 		number26 += num[1];
 	}
-	if (num[2] != '\0')
+	if (num[2] != '/0')
 	{
 		number26 += num[2];
 	}
@@ -2063,7 +2063,7 @@ int main()
 	input.resize(500);
 
 	count_input = 0;
-	for (int x = 0; list2[x] != '\0'; x++) {
+	for (int x = 0; list2[x] != '/0'; x++) {
 		count_input++; // This variable can be used if you need the count later on.
 	}
 	input = list2;
@@ -2138,21 +2138,21 @@ int main()
 
 			//convert to string for calling the class
 			count_input = 0;
-			for (int x = 0; name[x] != '\0'; x++) {
+			for (int x = 0; name[x] != '/0'; x++) {
 				name3 += name[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
 			name3 = name;
 
 			count_input = 0;
-			for (int x = 0; title[x] != '\0'; x++) {
+			for (int x = 0; title[x] != '/0'; x++) {
 				title3 += title[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
 			title3 = title;
 
 			count_input = 0;
-			for (int x = 0; post_string[x] != '\0'; x++) {
+			for (int x = 0; post_string[x] != '/0'; x++) {
 				post3 += post_string[x];
 				count_input++; // This variable can be used if you need the count later on.
 			}
@@ -2224,7 +2224,7 @@ int main()
 				}
 
 				//remember the old post file name
-				std:ofstream outfile14(encryptedFileName);
+			std:ofstream outfile14(encryptedFileName);
 				outfile14 << time_str27 + current_filename;  //always should be "BulletinLog.txt"  Somehow disable editing of log files?
 				outfile14 << "\r\n";
 				outfile14.close();
@@ -2283,7 +2283,7 @@ int main()
 				outFile55.open(current_filename, wios::out);
 				for (int x = 0; x < 257; x++)// To get you all the lines.
 				{
-					tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '\0'), tempFileLines2[x].end());
+					tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '/0'), tempFileLines2[x].end());
 					outFile55 << tempFileLines2[x];
 					outFile55 << "\n";
 				}
@@ -2412,7 +2412,7 @@ int main()
 
 				for (int x = 0; x < 257; x++) {
 					// Remove NULL characters before writing
-					tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
+					tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '/0'), tempFileLines[x].end());
 					outFile50 << tempFileLines[x];
 					//outFile50 << "\n"; // Add a newline explicitly
 				}
@@ -2499,7 +2499,7 @@ int main()
 			postNum2.clear();
 			postNum2.resize(50);
 
-			for (int x = 0; postNumChar[x] != '\0'; x++)
+			for (int x = 0; postNumChar[x] != '/0'; x++)
 			{
 				count_input++;
 			}
@@ -2545,7 +2545,7 @@ int main()
 			std::cin.getline(commentNumberChar, 50, '\n');
 			std::cout << "\r\n";
 			std::cin.clear();
-			for (int x = 0; commentNumberChar[x] != '\0'; x++)
+			for (int x = 0; commentNumberChar[x] != '/0'; x++)
 			{
 				count_input++;
 			}
@@ -2565,7 +2565,7 @@ int main()
 				input.clear();
 				input.resize(500);
 				count_input = 0;
-				for (int x = 0; commentNumberChar[x] != '\0'; x++) // there seems to be an array alocation probelem here
+				for (int x = 0; commentNumberChar[x] != '/0'; x++) // there seems to be an array alocation probelem here
 				{
 					count_input++;
 				}
@@ -2820,7 +2820,7 @@ int main()
 					for (int x = 0; x < 257; x++)
 					{
 						// Remove NULL characters before writing
-						tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
+						tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '/0'), tempFileLines[x].end());
 						outFile22 << tempFileLines3[x];
 					}
 
@@ -2860,7 +2860,7 @@ int main()
 								array_index = x;
 								break;
 							}
-							else if(std::stoi(postNum2) == 0)
+							else if (std::stoi(postNum2) == 0)
 							{
 								array_index = -1;
 								break;
@@ -3021,7 +3021,7 @@ int main()
 				input.resize(500);
 
 				count_input = 0;
-				for (int x = 0; input2[x] != '\0'; x++) // there seems to be an array allocation problem here
+				for (int x = 0; input2[x] != '/0'; x++) // there seems to be an array allocation problem here
 				{
 					count_input++;
 				}
@@ -3094,7 +3094,7 @@ int main()
 			std::cout << ("enter post number: ");
 			std::cin.getline(postNumChar, 50, '\n');
 			std::cin.clear();
-			for (int x = 0; postNumChar[x] != '\0'; x++)
+			for (int x = 0; postNumChar[x] != '/0'; x++)
 			{
 				count_input++;
 			}
@@ -3164,7 +3164,7 @@ int main()
 				input.clear();
 				input.resize(500);
 
-				for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+				for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 				{
 					input.at(x) = input2[x];
 					count_input++;
@@ -3194,7 +3194,7 @@ int main()
 			input.clear();
 			input.resize(500);
 
-			for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+			for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 			{
 				input.at(x) = input2[x];
 				count_input++;
@@ -3235,7 +3235,7 @@ int main()
 				std::cout << ("enter post number: ");
 				std::cin.getline(postNumChar, 50, '\n');
 
-				for (int x = 0; postNumChar[x] != '\0'; x++)
+				for (int x = 0; postNumChar[x] != '/0'; x++)
 				{
 					count_input++;
 				}
@@ -3331,7 +3331,7 @@ int main()
 
 				master_post = true;
 
-				for (int x = 0; postNumChar[x] != '\0'; x++)
+				for (int x = 0; postNumChar[x] != '/0'; x++)
 				{
 					count_input++;
 				}
@@ -3440,7 +3440,7 @@ int main()
 						input.clear();
 						input.resize(500);
 
-						for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+						for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 						{
 							count_input++;
 						}
@@ -3543,7 +3543,7 @@ int main()
 					input.assign(500, 'a');
 					input.clear();
 					input.resize(500);
-					for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+					for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 					{
 						count_input++;
 					}
@@ -3574,7 +3574,7 @@ int main()
 			input.clear();
 			input.resize(500);
 
-			for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+			for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 			{
 				count_input++;
 			}
@@ -3611,7 +3611,7 @@ int main()
 				std::cout << "\n";
 				std::cin.getline(postNumChar, 50, '\n');
 
-				for (int x = 0; postNumChar[x] != '\0'; x++)
+				for (int x = 0; postNumChar[x] != '/0'; x++)
 				{
 					count_input++;
 				}
@@ -3679,7 +3679,7 @@ int main()
 			input.assign(500, 'a');
 			input.clear();
 			input.resize(500);
-			for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+			for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 			{
 				count_input++;
 			}
@@ -3708,7 +3708,7 @@ int main()
 			input.clear();
 			input.resize(500);
 
-			for (int x = 0; input2[x] != '\0'; x++)  //there seems to be an array allocation problem here
+			for (int x = 0; input2[x] != '/0'; x++)  //there seems to be an array allocation problem here
 			{
 				count_input++;
 			}
