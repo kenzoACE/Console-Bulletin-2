@@ -1497,7 +1497,7 @@ string _GetComments(int headingNumber2)
 			findPost = fileComment2.size();
 			try
 			{
-				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") - 4);  //skip the post -- currently does not skip post
+				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") + 5);  //skip the post -- currently does not skip post
 			}
 			catch (exception e)
 			{
@@ -1506,8 +1506,8 @@ string _GetComments(int headingNumber2)
 			break;
 		}
 
-		findPost = fileComment2.size();
-		fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 5, findPost - fileComment2.find(":@;@") - 4);  //skip the post
+		findPost = fileComment2.length();
+		fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 5, findPost - fileComment2.find(":@;@") + 5);  //skip the post
 	}
 
 	//get rid of trailing posts
@@ -1519,7 +1519,7 @@ string _GetComments(int headingNumber2)
 	// see if there are any comments
 	do
 	{
-		if (tempindex - lastIndex_global < 22 && counter == 5)
+		if (index_global == std::string::npos && counter == 6)
 		{
 			_comment = "COMMENT_NOT_FOUND";
 			break;
@@ -1551,7 +1551,7 @@ string _GetComments(int headingNumber2)
 		counter++;
 
 		tempindex_found = fileComment2.find(";@", tempindex_found2);
-	} while (tempindex_found - lastIndex_global > 22 && counter < 7 && strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") != 0);
+	} while (1/*tempindex_found - lastIndex_global > 22 && counter < 7 && strcmp(_comment.c_str(), "COMMENT_NOT_FOUND") != 0*/);
 
 	if (_comment == "COMMENT_NOT_FOUND" || counter == 5)
 	{
@@ -1560,13 +1560,13 @@ string _GetComments(int headingNumber2)
 
 	counter = 0;
 
-	std::size_t index19 = fileComment.find(":@", 2);
+	std::size_t index19 = fileComment2.find(":@", 2);
 	index_global = index19;
-	std::size_t index21 = fileComment.find(":@", index_global + 2);
+	std::size_t index21 = fileComment2.find(":@", index_global + 2);
 	index_global = index21;
-	std::size_t length21 = fileComment.find(":@", index_global + 2);
+	std::size_t length21 = fileComment2.find(":@", index_global + 2);
 	index_global = length21;
-	std::size_t length22 = fileComment.find(":@", index_global + 2);
+	std::size_t length22 = fileComment2.find(":@", index_global + 2);
 	index_global = length22;
 
 	comments3.append(fileComment2);
@@ -1608,6 +1608,7 @@ string _GetComments(int headingNumber2)
 		_comment.clear();
 		_comment.resize(30);
 		_comment.assign("FIRST_COMMENT");
+		numberOfComments = 0;
 		return _comment;
 	}
 
@@ -2667,7 +2668,7 @@ int main()
 					post3.insert(pos, " ");
 				}
 
-				temp = _GetComments(_heading);
+				//temp = _GetComments(_heading);
 
 				int index_5 = 0;
 
@@ -2677,13 +2678,13 @@ int main()
 					commentNumber3 = 0;
 				}
 
-				temp = _GetComments(_heading);
+				//temp = _GetComments(_heading);
 
 				int array_index = 0;
 
-				temp = _GetPost(stoi(postNum2.c_str()));
+				//temp = _GetPost(stoi(postNum2.c_str()));
 
-				_GetComments(stoi(postNum2.c_str()));
+				//_GetComments(stoi(postNum2.c_str()));
 
 				// If there are too many comments, clone the post and begin a new post.  Max number of comments are limited to 64.
 				if (numberOfComments == MAX_COMMENT_NUM)
@@ -2868,16 +2869,16 @@ int main()
 						}
 						catch (const std::exception& e)
 						{
-							std::cout << "Error counting array: " << e.what() << std::endl;
+							//std::cout << "Error counting array: " << e.what() << std::endl;
 						}
 					}
 
-					array_index++;
+					//array_index++;
 
 					int index_2 = 0;
 
 					// new node
-					if (std::stoi(commentNumber2.c_str()) == 0)
+					if (std::stoi(commentNumber2.c_str()) == 0 && strcmp(temp.c_str(), "FIRST_COMMENT") == 0)
 					{
 						_GetComments(_heading);
 						// insert the commented post to the appropriate position
