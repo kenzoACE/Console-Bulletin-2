@@ -841,7 +841,7 @@ string getFile2()
 	//initialize temp244
 	for (int x = 0; x < 500000; x++)
 	{
-		temp244[x] = NULL;
+		temp244[x] = '\n';
 	}
 
 	char duplicate[40000] = "";
@@ -1651,6 +1651,8 @@ string _GetComments(int headingNumber2)
 				//std::cerr << "Error: Delimiter not found in the string. Exiting program." << std::endl;
 				// Perform any necessary cleanup here
 				//exit(EXIT_FAILURE);
+				//NumberOfComments = -1;
+				_comments = "COMMENT_NOT_FOUND";
 				break;
 			}
 
@@ -1678,7 +1680,7 @@ string _GetComments(int headingNumber2)
 		}
 	}
 
-	removeEmptyStrings(commentArray, 127);
+	//removeEmptyStrings(commentArray, 127);
 
 	indexstring.clear();
 	indexstring.resize(7);
@@ -1804,7 +1806,7 @@ int main()
 
 	//check file integrity before anything else
 	const std::string filePath = current_filename;
-	checkFileAlignment(filePath);
+	//checkFileAlignment(filePath);
 
 	//initialize the old file name list array
 	for (int x = 0; x < 1000; x++)
@@ -2880,7 +2882,7 @@ int main()
 					// new node
 					if (std::stoi(commentNumber2.c_str()) == 0 && strcmp(temp.c_str(), "FIRST_COMMENT") == 0)
 					{
-						_GetComments(_heading);
+						//_GetComments(_heading);
 						// insert the commented post to the appropriate position
 						std::size_t temp13 = tempFileLines3[array_index].find(":@", 0); // insert the first comment at the end position
 						index_2 = temp13;
@@ -2933,6 +2935,12 @@ int main()
 					}
 					else if (stoi(commentNumber2.c_str()) >= 0 && stoi(commentNumber2.c_str()) <= 64) // checked the number before so this if statement is not needed
 					{
+						//if (strcmp(_comments.c_str(), "COMMENT_NOT_FOUND") == 0)
+						//{
+							std::cout << "sorry commenting on comment not supported, exiting.... sorry"; // this should never be hit
+							break;
+						//}
+
 						int commentPositionToInsert = 0;
 
 						if (isNumber(commentNumber2))
