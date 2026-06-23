@@ -2227,7 +2227,7 @@ int main()
 				}
 
 				//remember the old post file name
-			std:ofstream outfile14(encryptedFileName);
+			    std:ofstream outfile14(encryptedFileName);
 				outfile14 << time_str27 + current_filename;  //always should be "BulletinLog.txt"  Somehow disable editing of log files?
 				outfile14 << "\r\n";
 				outfile14.close();
@@ -2249,7 +2249,7 @@ int main()
 				//update the data file and close
 				wofstream outfile33;
 				outfile33.imbue(std::locale("en_US.UTF-8"));
-				outfile33.open("BulletinData.txt", ios::out);
+				outfile33.open("BulletinData.txt", ios::out | ios::trunc);
 				outfile33 << "129";
 				outfile33.close();
 
@@ -2283,7 +2283,7 @@ int main()
 
 				ofstream outFile55;
 				outFile55.imbue(std::locale("en_US.UTF-8"));
-				outFile55.open(current_filename, wios::out);
+				outFile55.open(current_filename, wios::out, ios::trunc);
 				for (int x = 0; x < 257; x++)// To get you all the lines.
 				{
 					tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '\0'), tempFileLines2[x].end());
@@ -2411,7 +2411,7 @@ int main()
 				tempFileLines[0] += "\n";
 
 				std::ofstream outFile50;
-				outFile50.open(current_filename, std::ios::out);
+				outFile50.open(current_filename, std::ios::out | std::ios::trunc);
 
 				for (int x = 0; x < 257; x++) {
 					// Remove NULL characters before writing
@@ -2425,7 +2425,7 @@ int main()
 				//update the data file and close
 				wofstream outFile2;
 				outFile2.imbue(std::locale("en_US.UTF-8"));
-				outFile2.open("BulletinData.txt");
+				outFile2.open("BulletinData.txt", ios::trunc);
 				//std::string s2 = std::to_string(numberOfPosts);
 				//char const* pchar2 = s2.c_str();
 
@@ -2706,7 +2706,7 @@ int main()
 					string str = ss.str();
 
 					ofstream outfile5;
-					outfile5.open("BulletinData.txt", ios::out);
+					outfile5.open("BulletinData.txt", ios::out | ios::trunc);
 					outfile5 << str;
 					outfile5.close();
 
@@ -2730,7 +2730,7 @@ int main()
 					char const* pchar5 = s5.c_str();
 
 					ofstream outFile6;
-					outFile6.open(current_filename);
+					outFile6.open(current_filename, ios::trunc);
 
 					temp = _GetPost(stoi(s5.c_str()));
 
@@ -2817,7 +2817,7 @@ int main()
 
 					// write the whole post array to file
 					ofstream outFile22;
-					outFile22.open(current_filename);
+					outFile22.open(current_filename, ios::trunc);
 
 					// insert all the posts to the appropriate position
 					for (int x = 0; x < 257; x++)
@@ -2920,7 +2920,7 @@ int main()
 						tempFileLines3[array_index].insert(index_2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str24 + ":@");
 						// write the whole post array to file
 						ofstream outFile;
-						outFile.open(current_filename);
+						outFile.open(current_filename, ios::trunc);
 
 						// int index4 = index;
 
@@ -2996,7 +2996,7 @@ int main()
 
 						// write the whole post array to file
 						ofstream outFile;
-						outFile.open(current_filename);
+						outFile.open(current_filename, ios::trunc);
 
 						// int index4 = index;
 
