@@ -962,7 +962,7 @@ string getFile2()
 		}
 		else
 		{
-			pos = all.find("\r\n", start);
+			pos = all.find('\n', start);
 		}
 
 		if(pos == std::string::npos)
@@ -981,7 +981,7 @@ string getFile2()
 		}
 		else
 		{
-			tempFileLines3[index] = all.substr(start, pos - start) + '\r';
+			tempFileLines3[index] = all.substr(start, pos - start) + "\r\n";
 		}
 
 		// temp244 にもコピー
