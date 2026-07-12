@@ -960,6 +960,16 @@ string getFile2()
 		if (pos == std::string::npos) {
 			break;  // デリミタがもう無い
 		}
+		else
+		{
+			pos = all.find("\r\n", start);
+		}
+
+		if(pos == std::string::npos)
+		{
+			std::cout << "file read error... please check the file for errors";
+			break;  // デリミタがもう無い
+		}
 
 		pos += 2;  // デリミタを含める
 
@@ -2272,13 +2282,13 @@ int main()
 				for (int x = 1; x < 129; x++)
 				{
 					tempFileLines2[x] += (tempFileLines3[x - 1]);
-					tempFileLines2[x] += "\n";
+					tempFileLines2[x] += "\r\n";
 				}
 
 				//fill in 256 lines
 				for (int x = 129; x < 257; x++)
 				{
-					tempFileLines2[x] += "\n";
+					tempFileLines2[x] += "\r\n";
 				}
 
 				ofstream outFile55;
@@ -2288,7 +2298,7 @@ int main()
 				{
 					tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '\0'), tempFileLines2[x].end());
 					outFile55 << tempFileLines2[x];
-					outFile55 << "\n";
+					//outFile55 << "\r\n";
 				}
 				outFile55.close();
 
@@ -2408,7 +2418,7 @@ int main()
 				tempFileLines[0] += (":@" + title3 + ":@" + name3 + ":@" + post3 + ":@");
 				tempFileLines[0] += time_str26.c_str();
 				tempFileLines[0] += ":@;@";
-				tempFileLines[0] += "\n";
+				tempFileLines[0] += "\r\n";
 
 				std::ofstream outFile50;
 				outFile50.open(current_filename, std::ios::out | std::ios::trunc);
@@ -2417,7 +2427,7 @@ int main()
 					// Remove NULL characters before writing
 					tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 					outFile50 << tempFileLines[x];
-					//outFile50 << "\n"; // Add a newline explicitly
+					outFile50 << "\n"; // Add a newline explicitly
 				}
 
 				outFile50.close();
@@ -2823,8 +2833,9 @@ int main()
 					for (int x = 0; x < 257; x++)
 					{
 						// Remove NULL characters before writing
-						tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
+						//tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 						outFile22 << tempFileLines3[x];
+						outFile22 << "\r\n";
 					}
 
 					outFile22.close();
@@ -2930,6 +2941,7 @@ int main()
 							tempFileLines[x] += (tempFileLines3[x]);
 
 							outFile << tempFileLines[x];
+							outFile << "\r\n";
 						}
 						outFile.close();
 					}
@@ -3006,6 +3018,7 @@ int main()
 							tempFileLines[x] += (tempFileLines3[x]);
 
 							outFile << tempFileLines[x];
+							outFile << "\r\n";
 						}
 						outFile.close();
 					}
