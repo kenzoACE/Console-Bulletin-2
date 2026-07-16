@@ -2334,7 +2334,7 @@ int main()
 				strftime(buf, sizeof(buf), "%Y/%m/%d.%X", &tstruct); // Format the time
 				time_str26 = (buf);      // Append the formatted time to the string
 
-				if (num50 != 0 && numPosts != 0)  //numPosts is set in listPost() function, called once on program begin
+				if (num50 != 0 && numberOfPosts != 0)  //numPosts is set in listPost() function, called once on program begin
 				{
 					//getFile2();
 
@@ -2345,7 +2345,7 @@ int main()
 
 						if (pos2 != std::string::npos)
 						{
-							numPosts++;
+							numberOfPosts++;
 						}
 						else
 						{
@@ -2362,8 +2362,8 @@ int main()
 
 				//update for new post
 				//numberOfPosts++;
-				numPosts = numberOfPosts; //both global variables
-				numberOfPosts++;
+				//numPosts = numberOfPosts; //both global variables
+				numbPosts++;
 				std::string s = std::to_string(numberOfPosts);
 				char const* pchar = s.c_str();
 
@@ -2425,7 +2425,7 @@ int main()
 
 				for (int x = 0; x < 257; x++) {
 					// Remove NULL characters before writing
-					tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
+					//tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 					outFile50 << tempFileLines[x];
 					outFile50 << "\n"; // Add a newline explicitly
 				}
@@ -2439,11 +2439,11 @@ int main()
 				//std::string s2 = std::to_string(numberOfPosts);
 				//char const* pchar2 = s2.c_str();
 
-				if (numberOfPosts < 10)
+				if (numPosts < 10)
 				{
 					outFile2 << pchar << "  ";
 				}
-				else if (numberOfPosts < 100)
+				else if (numPosts < 100)
 				{
 					outFile2 << pchar << " ";
 				}
