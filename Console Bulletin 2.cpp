@@ -2296,7 +2296,7 @@ int main()
 				outFile55.open(current_filename, wios::out, ios::trunc);
 				for (int x = 0; x < 257; x++)// To get you all the lines.
 				{
-					tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '\0'), tempFileLines2[x].end());
+					//tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '\0'), tempFileLines2[x].end());
 					outFile55 << tempFileLines2[x];
 					//outFile55 << "\r\n";
 				}
@@ -2427,7 +2427,7 @@ int main()
 					// Remove NULL characters before writing
 					//tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 					outFile50 << tempFileLines[x];
-					outFile50 << "\n"; // Add a newline explicitly
+					//outFile50 << "\n"; // Add a newline explicitly
 				}
 
 				outFile50.close();
