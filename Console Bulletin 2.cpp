@@ -975,23 +975,27 @@ string getFile2()
 
 		// 1ブロックを取り出す
 
-		if (index != 0)
+		if (index != 0 && pos - start > 10)
 		{
 			tempFileLines3[index] = all.substr(start - 1, pos - start);
+			numberOfPosts++;
+			// temp244 にもコピー
+			for (size_t i = start - 1; i < pos; i++) {
+				temp244[fileCount++] = all[i];
+			}
 		}
-		else
+		else if (pos - start > 10)
 		{
 			tempFileLines3[index] = all.substr(start, pos - start - 2) + "\r\n";
-		}
-
-		// temp244 にもコピー
-		for (size_t i = start; i < pos; i++) {
-			temp244[fileCount++] = all[i];
+			// temp244 にもコピー
+			for (size_t i = start; i < pos - 2; i++) {
+				temp244[fileCount++] = all[i];
+			}
+			numberOfPosts++;
 		}
 
 		start = pos;
 		index++;
-		numberOfPosts++;
 	}
 
 	int tempNum = stoi(NUMBER.c_str());
