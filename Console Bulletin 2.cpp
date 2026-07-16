@@ -977,11 +977,11 @@ string getFile2()
 
 		if (index != 0)
 		{
-			tempFileLines3[index] = all.substr(start + 1, pos - start);
+			tempFileLines3[index] = all.substr(start - 1, pos - start);
 		}
 		else
 		{
-			tempFileLines3[index] = all.substr(start, pos - start) + "\r\n";
+			tempFileLines3[index] = all.substr(start, pos - start - 2) + "\r\n";
 		}
 
 		// temp244 にもコピー
