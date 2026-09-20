@@ -1508,13 +1508,14 @@ string _GetComments(int headingNumber2)
 	{
 		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
 		{
-			findPost = fileComment2.size();
+			//findPost = fileComment2.size();
 			try
 			{
 				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") + 5);  //skip the post -- currently does not skip post
 			}
 			catch (exception e)
 			{
+				cout << "error in variable fileComment2";
 			}
 
 			break;
