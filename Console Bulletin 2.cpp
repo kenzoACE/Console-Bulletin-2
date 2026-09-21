@@ -1516,6 +1516,7 @@ string _GetComments(int headingNumber2)
 			catch (exception e)
 			{
 				cout << "error in variable fileComment2";
+				SYSTEM("PAUSE");
 			}
 
 			break;
@@ -2939,16 +2940,20 @@ int main()
 						outFile.open(current_filename, ios::trunc);
 
 						// int index4 = index;
+						// int index4 = index;
+						std::ofstream outFile51;
+						outFile51.open(current_filename, std::ios::out | std::ios::trunc);
+						outFile51.clear();
 
 						// insert all the posts to the appropriate position
-						for (int x = 0; x < 257; x++)
-						{
-							tempFileLines[x] += (tempFileLines3[x]);
-
-							outFile << tempFileLines[x];
-							outFile << "\r\n";
+						for (int x = 0; x < 257; x++) {
+							// Remove NULL characters before writing
+							//tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
+							outFile51 << tempFileLines3[x];
+							//outFile50 << "\n"; // Add a newline explicitly
 						}
-						outFile.close();
+
+						outFile51.close();
 					}
 					else if (stoi(commentNumber2.c_str()) >= 0 && stoi(commentNumber2.c_str()) <= 64) // checked the number before so this if statement is not needed
 					{
