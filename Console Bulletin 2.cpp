@@ -2936,8 +2936,6 @@ int main()
 						index_2 += 2;
 						tempFileLines3[array_index].insert(index_2, title3 + ":@" + name3 + ":@" + post3 + ":@" + time_str24 + ":@");
 						// write the whole post array to file
-						ofstream outFile;
-						outFile.open(current_filename, ios::trunc);
 
 						// int index4 = index;
 						// int index4 = index;
