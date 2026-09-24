@@ -955,17 +955,19 @@ string getFile2()
 	size_t pos = 0;
 	int index = 0;
 
+	all.erase(std::remove(all.begin(), all.end(), '\n'), all.end());
+
 	while (index < 257) {
 		pos = all.find(";@", start);
-		if (pos == std::string::npos) {
+		if (pos == std::string::npos || index == 256) {
 			break;  // デリミタがもう無い
 		}
 		else
 		{
-			pos = all.find('\n', start);
+			pos = all.find(";@", start);
 		}
 
-		if(pos == std::string::npos)
+		if (pos == std::string::npos)
 		{
 			std::cout << "file read error... please check the file for errors";
 			break;  // デリミタがもう無い
@@ -975,27 +977,34 @@ string getFile2()
 
 		// 1ブロックを取り出す
 
-		if (index != 0 && pos - start > 10)
+		if (index != 0/* && pos - start > 10*/)
 		{
-			tempFileLines3[index] = all.substr(start - 1, pos - start);
-			numberOfPosts++;
+			tempFileLines3[index] = all.substr(start, pos - start);
 			// temp244 にもコピー
 			for (size_t i = start - 1; i < pos; i++) {
 				temp244[fileCount++] = all[i];
 			}
+			numberOfPosts++;
 		}
 		else if (pos - start > 10)
 		{
-			tempFileLines3[index] = all.substr(start, pos - start - 2) + "\r\n";
+			tempFileLines3[index] = all.substr(start, pos - start - 2) + ";@";
 			// temp244 にもコピー
 			for (size_t i = start; i < pos - 2; i++) {
 				temp244[fileCount++] = all[i];
 			}
 			numberOfPosts++;
 		}
+		else
+		{
+			std::cout << "file read error... please check the file for errors";
+			system("PAUSE");
+			break;
+		}
 
 		start = pos;
 		index++;
+		//numberOfPosts++;
 	}
 
 	int tempNum = stoi(NUMBER.c_str());
@@ -1516,7 +1525,6 @@ string _GetComments(int headingNumber2)
 			catch (exception e)
 			{
 				cout << "error in variable fileComment2";
-				SYSTEM("PAUSE");
 			}
 
 			break;
@@ -2034,7 +2042,7 @@ int main()
 	temp = listPost();  //stack overflow??
 	for (int x = 0; x <= 255 && listString[x].length() != 0; x++)
 	{
-		listString[x].shrink_to_fit();
+		//listString[x].shrink_to_fit();
 		strOutData.append(listString[x].c_str());
 		strOutData.append("\r\n");
 	}
@@ -2180,8 +2188,10 @@ int main()
 			//find all delimiters and replace
 			myReplace(title3, ":@", " ");
 			myReplace(title3, ";@", " ");
+			myReplace(title3, "-@-", "\r\n");
 			myReplace(post3, ":@", " ");
 			myReplace(post3, ";@", " ");
+			myReplace(post3, "-@-", "\r\n");
 			myReplace(name3, ":@", " ");
 			myReplace(name3, ";@", " ");
 
@@ -2243,7 +2253,7 @@ int main()
 				}
 
 				//remember the old post file name
-			    std:ofstream outfile14(encryptedFileName);
+				std:ofstream outfile14(encryptedFileName);
 				outfile14 << time_str27 + current_filename;  //always should be "BulletinLog.txt"  Somehow disable editing of log files?
 				outfile14 << "\r\n";
 				outfile14.close();
@@ -2265,7 +2275,7 @@ int main()
 				//update the data file and close
 				wofstream outfile33;
 				outfile33.imbue(std::locale("en_US.UTF-8"));
-				outfile33.open("BulletinData.txt", ios::out | ios::trunc);
+				outfile33.open("BulletinData.txt", ios::out);
 				outfile33 << "129";
 				outfile33.close();
 
@@ -2288,7 +2298,7 @@ int main()
 				for (int x = 1; x < 129; x++)
 				{
 					tempFileLines2[x] += (tempFileLines3[x - 1]);
-					tempFileLines2[x] += "\r\n";
+					tempFileLines2[x] += "\n";
 				}
 
 				//fill in 256 lines
@@ -2299,13 +2309,14 @@ int main()
 
 				ofstream outFile55;
 				outFile55.imbue(std::locale("en_US.UTF-8"));
-				outFile55.open(current_filename, wios::out, ios::trunc);
+				outFile55.open(current_filename, std::wios::out | std::wios::trunc);
+				outFile55.clear();
+
 				for (int x = 0; x < 257; x++)// To get you all the lines.
 				{
-					// Remove all trailing NULL characters
 					tempFileLines2[x].erase(std::remove(tempFileLines2[x].begin(), tempFileLines2[x].end(), '\0'), tempFileLines2[x].end());
 					outFile55 << tempFileLines2[x];
-					//outFile55 << "\r\n";
+					outFile55 << "\n";
 				}
 				outFile55.close();
 
@@ -2370,8 +2381,8 @@ int main()
 				//update for new post
 				//numberOfPosts++;
 				//numPosts = numberOfPosts; //both global variables
-				numbPosts++;
-				std::string s = std::to_string(numberOfPosts);
+				numPosts++;
+				std::string s = std::to_string(numPosts);
 				char const* pchar = s.c_str();
 
 				for (int x = 0; x < 257; x++)
@@ -2429,6 +2440,7 @@ int main()
 
 				std::ofstream outFile50;
 				outFile50.open(current_filename, std::ios::out | std::ios::trunc);
+				outFile50.clear();
 
 				for (int x = 0; x < 257; x++) {
 					// Remove NULL characters before writing
@@ -2442,7 +2454,9 @@ int main()
 				//update the data file and close
 				wofstream outFile2;
 				outFile2.imbue(std::locale("en_US.UTF-8"));
-				outFile2.open("BulletinData.txt", ios::trunc);
+				outFile2.open("BulletinData.txt", std::ios::out | std::ios::trunc);
+				outFile2.clear();
+
 				//std::string s2 = std::to_string(numberOfPosts);
 				//char const* pchar2 = s2.c_str();
 
@@ -2643,8 +2657,10 @@ int main()
 			// find all delimiters and replace
 			myReplace(title3, ":@", " ");
 			myReplace(title3, ";@", " ");
+			myReplace(title3, "-@-", "\r\n");
 			myReplace(post3, ":@", " ");
 			myReplace(post3, ";@", " ");
+			myReplace(post3, "-@-", "\r\n");
 			myReplace(name3, ":@", " ");
 			myReplace(name3, ";@", " ");
 
@@ -2724,6 +2740,7 @@ int main()
 
 					ofstream outfile5;
 					outfile5.open("BulletinData.txt", ios::out | ios::trunc);
+					outfile5.clear();
 					outfile5 << str;
 					outfile5.close();
 
@@ -2835,12 +2852,13 @@ int main()
 					// write the whole post array to file
 					ofstream outFile22;
 					outFile22.open(current_filename, ios::trunc);
+					outFile22.clear();
 
 					// insert all the posts to the appropriate position
 					for (int x = 0; x < 257; x++)
 					{
 						// Remove NULL characters before writing
-						tempFileLines3[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
+						tempFileLines[x].erase(std::remove(tempFileLines[x].begin(), tempFileLines[x].end(), '\0'), tempFileLines[x].end());
 						outFile22 << tempFileLines3[x];
 						outFile22 << "\r\n";
 					}
@@ -2939,11 +2957,10 @@ int main()
 						// write the whole post array to file
 
 						// int index4 = index;
-						// int index4 = index;
 						std::ofstream outFile51;
 						outFile51.open(current_filename, std::ios::out | std::ios::trunc);
 						outFile51.clear();
-
+						
 						// insert all the posts to the appropriate position
 						for (int x = 0; x < 257; x++) {
 							// Remove NULL characters before writing
@@ -3018,14 +3035,16 @@ int main()
 						// write the whole post array to file
 						ofstream outFile;
 						outFile.open(current_filename, ios::trunc);
+						outFile.clear();
 
 						// int index4 = index;
 
 						// insert all the posts to the appropriate position
 						for (int x = 0; x < 257; x++)
 						{
-							//tempFileLines[x] += (tempFileLines3[x]);
+							// Remove NULL characters before writing
 							tempFileLines3[x].erase(std::remove(tempFileLines3[x].begin(), tempFileLines3[x].end(), '\0'), tempFileLines3[x].end());
+
 							outFile << tempFileLines3[x];
 							outFile << "\r\n";
 						}
@@ -3077,14 +3096,14 @@ int main()
 
 			FormatDelim* obj = new FormatDelim(":@");
 
-			for (int x = 0; x < 257 && listString[x].size() > 22; x++)
+			for (int x = 0; x < 257 && x < numberOfPosts; x++)
 			{
 				//listString[x].shrink_to_fit();
 				std::cout << (obj->set(listString[x].c_str()));
-				std::cout << ("\r\n");
+				std::cout << ("\n");
 			}
-
-			numberOfPosts = numPosts;  // set in getFile2 function			delete obj;
+			delete obj;
+			//numberOfPosts = numPosts;  // set in getFile2 function;
 
 			//std::cout << strOutData.c_str();
 			//input.clear();
