@@ -1520,7 +1520,7 @@ string _GetComments(int headingNumber2)
 			//findPost = fileComment2.size();
 			try
 			{
-				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") + 5);  //skip the post -- currently does not skip post
+				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") + 3);  //skip the post -- currently does not skip post
 			}
 			catch (exception e)
 			{
@@ -1531,7 +1531,7 @@ string _GetComments(int headingNumber2)
 		}
 
 		findPost = fileComment2.length();
-		fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 5, findPost - fileComment2.find(":@;@") + 5);  //skip the post
+		fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 3, findPost - fileComment2.find(":@;@") + 3);  //skip the post
 	}
 
 	//get rid of trailing posts
