@@ -1488,6 +1488,8 @@ string _GetComments(int headingNumber2)
 		fileComment2.at(x) = temp244[x];
 	}
 
+	myReplace(fileComment2, "@@", "@;@");
+
 	string comments3;
 	comments3.assign(50000, 'a');
 	comments3.clear();
@@ -1515,12 +1517,21 @@ string _GetComments(int headingNumber2)
 	//extract the post line from whole file -- start debugging here
 	for (int x = 0; x < numPosts; x++)
 	{
+		try
+		{
+			stoi(fileComment2.substr(0, 3));
+		}
+		catch (exception e)
+		{
+			fileComment2 = fileComment2.substr(2, fileComment.length());
+		}
+
 		if (stoi(fileComment2.substr(0, 3)) == headingNumber2)
 		{
 			//findPost = fileComment2.size();
 			try
 			{
-				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") + 3);  //skip the post -- currently does not skip post
+				fileComment2 = fileComment2.substr(0, fileComment2.find(":@;@") + 4);  //skip the post -- currently does not skip post
 			}
 			catch (exception e)
 			{
@@ -1531,9 +1542,10 @@ string _GetComments(int headingNumber2)
 		}
 
 		findPost = fileComment2.length();
-		fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 3, findPost - fileComment2.find(":@;@") + 3);  //skip the post
+		//fileComment2 = fileComment2.substr(fileComment2.find(":@;@") + 3, findPost - fileComment2.find(":@;@") + 3);  //skip the post
 	}
-
+	//fix the delimiter for safety reasons
+	myReplace(fileComment2, ";@", ":@;@");
 	//get rid of trailing posts
 	findPost = fileComment2.find(":@;@");
 	fileComment2 = fileComment2.substr(0, findPost + 4);
@@ -1626,7 +1638,7 @@ string _GetComments(int headingNumber2)
 
 	int noCommentNum = index_global - length21;
 
-	if (noCommentNum <= 22 || globalcounter < 1)  //there should be only timestamp when last delimiter other than a comment and a timestamp
+	if (noCommentNum <= 22/* || globalcounter < 1*/)  //there should be only timestamp when last delimiter other than a comment and a timestamp
 	{
 		_comment.assign(30, 'a');
 		_comment.clear();
@@ -1636,7 +1648,7 @@ string _GetComments(int headingNumber2)
 		return _comment;
 	}
 
-	post0.append(comments3.substr(0, comments3.length() - 2));
+	post0.append(comments3.substr(0, comments3.length()));
 
 	int index5 = 0;
 	int index9 = 0;
@@ -1672,10 +1684,10 @@ string _GetComments(int headingNumber2)
 			index_global2 = commentIndex43;
 
 			if (commentIndex43 == std::string::npos) {
-				//std::cerr << "Error: Delimiter not found in the string. Exiting program." << std::endl;
+				std::cerr << "Error: Delimiter not found in the string. Exiting program." << std::endl;
 				// Perform any necessary cleanup here
-				//exit(EXIT_FAILURE);
-				//NumberOfComments = -1;
+				exit(EXIT_FAILURE);
+				NumberOfComments = -1;
 				_comments = "COMMENT_NOT_FOUND";
 				break;
 			}
@@ -1697,8 +1709,12 @@ string _GetComments(int headingNumber2)
 
 			tempComment = post0.substr(commentIndex - 1, index_global2 - index9 - 1);
 
-			commentArray[x] = tempComment;
-			numberOfComments++;
+			if (x != 0)
+			{
+				commentArray[x] = tempComment;
+				numberOfComments++;
+			}
+			
 			index9 = index_global2;
 			index9++;
 		}
@@ -1730,7 +1746,7 @@ string _GetComments(int headingNumber2)
 			comment.append(commentArray[x]);
 			_comment.assign(50000, 'a');
 			_comment.clear();
-			_comment.resize(50000);
+			//_comment.resize(50000);
 			_comment.append(comment);
 		}
 	}
@@ -1750,7 +1766,6 @@ string _GetComments(int headingNumber2)
 
 	return post0;
 }
-
 int main()
 {
 	std::locale::global(std::locale("en_US.UTF-8")); // Set global locale to UTF-8
